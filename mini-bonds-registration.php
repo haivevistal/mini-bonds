@@ -22,7 +22,7 @@ function minibond_registration_step1() {
         <div class="col-xs-12 col-md-12 col-lg-12">
             <div class="row col-xs-12 col-md-6 col-lg-6">
                 <h1 class="register-account-title">REGISTER YOUR ACCOUNT</h1>
-                <p class="reg_desc"><strong>To register for your account follow these 3 easy steps.</strong></p>
+                <p class="reg_desc"><strong>To register for your account follow these 4 easy steps.</strong></p>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
                 <img src="<?php echo plugins_url( 'img/step1.png', __FILE__ ) ?>" alt="Registration Steps 1" class="register-steps pull-right" />
