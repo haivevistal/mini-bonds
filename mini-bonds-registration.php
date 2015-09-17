@@ -32,12 +32,12 @@ function minibond_registration_step1() {
             <h2 class="smaller form-title">PERSONAL DETAILS</h2>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-            <form method="post" name="registrationForm" id="registrationForm" role="form" novalidate="">
+            <form method="post" name="minibonds-registrationForm" id="minibonds-registrationForm" role="form" novalidate="">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="seltitle">Title:</label>
-                            <select id="seltitle" name="settitle" class="form-control" data-parsley-required="" data-parsley-error-message="Missing title" data-parsley-errors-container="#titleerror" data-parsley-id="2476">
+                            <select id="seltitle" name="settitle" class="form-control" data-parsley-required="" data-parsley-error-message="Missing title" data-parsley-errors-container="#titleerror">
                                 <option value="">Title</option>
                                 <option value="Mr">Mr</option>
                                 <option value="Mrs">Mrs</option>
@@ -45,25 +45,25 @@ function minibond_registration_step1() {
                                 <option value="Ms">Ms</option>
                                 <option value="Dr">Dr</option>
                             </select>
-                            <div id="titleerror"><ul class="parsley-errors-list" id="parsley-id-2476"></ul></div>
+                            <div id="titleerror"></div>
                         </div>
                         <div class="form-group">
                             <label for="firstname">First Name:</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="" data-parsley-required="true" data-parsley-error-message="Please enter your first name" data-parsley-id="9218"><ul class="parsley-errors-list" id="parsley-id-9218"></ul>
+                            <input type="text" class="form-control" id="firstname" name="firstname" value="" data-parsley-required="true" data-parsley-error-message="Please enter your first name">
                         </div>
                         <div class="form-group">
                             <label for="surname">Surname:</label>
-                            <input type="text" class="form-control" id="surname" name="surname" value="" data-parsley-required="true" data-parsley-error-message="Please enter your surname" data-parsley-id="8326"><ul class="parsley-errors-list" id="parsley-id-8326"></ul>
+                            <input type="text" class="form-control" id="surname" name="surname" value="" data-parsley-required="true" data-parsley-error-message="Please enter your surname">
                         </div>
                         <div class="form-group">
                             <label for="birthday">Date of Birth:</label>
                             <table border="0" class="multiselect"><tbody>
                                 <tr>
                                     <td>
-                                        <input class="form-control" id="birthdayday" name="birthdayday" style="height: 30px;" size="2" maxlength="2" minlength="2" data-parsley-minlength="1" data-parsley-min="1" data-parsley-type="integer" type="text" data-parsley-max="31" data-parsley-required="true" data-parsley-errors-container="#birthdayerror" data-parsley-error-message="Please enter a valid day" value="" data-parsley-id="0019">
+                                        <input class="form-control" id="birthdayday" name="birthdayday" style="height: 30px;" size="2" maxlength="2" minlength="2" data-parsley-minlength="1" data-parsley-min="1" data-parsley-type="integer" type="text" data-parsley-max="31" data-parsley-required="true" data-parsley-errors-container="#birthdayerror" data-parsley-error-message="Please enter a valid day" value="" />
                                     </td>
                                     <td>
-                                        <select id="selmonth" name="setmonth" class="form-control" data-parsley-dobvalidation="" data-parsley-validate-if-empty="" data-parsley-errors-container="#birthdayerror" data-parsley-id="5824" >
+                                        <select id="selmonth" name="setmonth" class="form-control" data-parsley-dobvalidation="" data-parsley-validate-if-empty="" data-parsley-errors-container="#birthdayerror">
                                             <option value="">Month</option>
                                             <option value="1">January</option>
                                             <option value="2">Febuary</option>
@@ -80,32 +80,32 @@ function minibond_registration_step1() {
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" id="birthdayyear" name="birthdayyear" style="height: 30px;" size="4" maxlength="4" data-parsley-minlength="4" data-parsley-required="true" data-parsley-type="integer" data-parsley-errors-container="#birthdayerror" data-parsley-error-message="Please enter a valid year (YYYY)" value="" data-parsley-id="1947">
+                                        <input type="text" class="form-control" id="birthdayyear" name="birthdayyear" style="height: 30px;" size="4" maxlength="4" data-parsley-minlength="4" data-parsley-required="true" data-parsley-type="integer" data-parsley-errors-container="#birthdayerror" data-parsley-error-message="Please enter a valid year (YYYY)" value="" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><div id=""></div></td>
                                 </tr>
                             </tbody></table>
-                            <div id="birthdayerror"><ul class="parsley-errors-list" id="parsley-id-0019"></ul><ul class="parsley-errors-list" id="parsley-id-5824"></ul><ul class="parsley-errors-list" id="parsley-id-1947"></ul></div>
+                            <div id="birthdayerror"></div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="email">Email Address:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722"><ul class="parsley-errors-list" id="parsley-id-5722"></ul>
+                            <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" />
                         </div>
                         <div class="form-group">
                             <label for="emailconfirm">Confirm Email Address:</label>
-                            <input type="email" class="form-control" id="emailconfirm" name="emailconfirm" value="" data-parsley-required="true" data-parsley-error-message="Please confirm your email address" data-parsley-id="0373"><ul class="parsley-errors-list" id="parsley-id-0373"></ul>
+                            <input type="email" class="form-control" id="emailconfirm" name="emailconfirm" value="" data-parsley-required="true" data-parsley-error-message="Please confirm your email address" />
                         </div>
                         <div class="form-group">
                             <label for="homephone">Home Phone:</label>
-                            <input type="text" maxlength="20" class="form-control" id="homephone" name="homephone" value="" data-parsley-required="true" data-parsley-error-message="Please enter a UK landline number" data-parsley-id="3750"><ul class="parsley-errors-list" id="parsley-id-3750"></ul>
+                            <input type="text" maxlength="20" class="form-control" id="homephone" name="homephone" value="" data-parsley-required="true" data-parsley-error-message="Please enter a UK landline number" />
                         </div>
                         <div class="form-group">
                             <label for="mobilephone">Mobile Phone:</label>
-                            <input type="text" maxlength="20" class="form-control" id="mobilephone" name="mobilephone" value="" data-parsley-required="true" data-parsley-error-message="Please enter your mobile telephone number" data-parsley-id="2165"><ul class="parsley-errors-list" id="parsley-id-2165"></ul>
+                            <input type="text" maxlength="20" class="form-control" id="mobilephone" name="mobilephone" value="" data-parsley-required="true" data-parsley-error-message="Please enter your mobile telephone number" />
                         </div>
                     </div>
                 </div>
@@ -142,19 +142,19 @@ function minibond_registration_step2() {
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="housenumber">House Name/Number:</label>
-					<input type="text" class="form-control" id="housenumber" name="housenumber" data-parsley-required="true" data-parsley-error-message="Please enter a house number" value="" data-parsley-id="5351"><ul class="parsley-errors-list" id="parsley-id-5351"></ul>
+					<input type="text" class="form-control" id="housenumber" name="housenumber" data-parsley-required="true" data-parsley-error-message="Please enter a house number" value="" />
 				</div>
 				<div class="form-group">
 					<label for="postcode">Postcode:</label>
 					<div class="controls form-inline postcodelookup">
-				    	<input type="text" class="form-control" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" data-parsley-id="8805">
+				    	<input type="text" class="form-control" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" />
 				    	<input type="button" id="findaddress" class="btn btn-default" value="Find Address">
 				    </div>
-				    <div id="postcodeerror"><ul class="parsley-errors-list" id="parsley-id-8805"></ul></div>
+				    <div id="postcodeerror"><ul class="parsley-errors-list" /></ul></div>
 				</div>
 				<div class="form-group">
 					<label for="street">Street Name:</label>
-				    <input type="text" class="form-control" id="street" name="street" data-parsley-required="true" data-parsley-error-message="Please enter a street name" value="" data-parsley-id="9340"><ul class="parsley-errors-list" id="parsley-id-9340"></ul>
+				    <input type="text" class="form-control" id="street" name="street" data-parsley-required="true" data-parsley-error-message="Please enter a street name" value="" />
 				</div>
 				<div class="form-group">
 					<label for="city">Town/City:</label>
@@ -164,11 +164,11 @@ function minibond_registration_step2() {
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="county">County:</label>
-					<input type="text" class="form-control" id="county" name="county" data-parsley-required="true" data-parsley-error-message="Please enter a county" value="" data-parsley-id="6266"><ul class="parsley-errors-list" id="parsley-id-6266"></ul>
+					<input type="text" class="form-control" id="county" name="county" data-parsley-required="true" data-parsley-error-message="Please enter a county" value="" />
 				</div>
 				<div class="form-group">
 					<label for="addresscountry">Country:</label>
-				    	<select id="addresscountry" data-parsley-required="true" class="form-control" name="addresscountry" data-parsley-id="2038">
+				    	<select id="addresscountry" data-parsley-required="true" class="form-control" name="addresscountry" />
 				    	<option value="305">Afghanistan</option>
 				    	<option value="436">Aland Islands</option>
 				    	<option value="327">Albania</option>
@@ -421,7 +421,7 @@ function minibond_registration_step2() {
 					<label for="addressyears">How Long Have You Lived Here:</label>
 					<table border="0" class="multiselect">
 					<tbody><tr><td>
-					    <select id="addressyears" name="addressyears" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter how long you have lived at this address" data-parsley-errors-container="#timeerror" data-parsley-id="0883">
+					    <select id="addressyears" name="addressyears" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter how long you have lived at this address" data-parsley-errors-container="#timeerror">
 					    	<option value="">Years</option>
 					    	<option value="0">0 Years</option>
 					    	<option value="1">1 Year</option>
@@ -436,7 +436,7 @@ function minibond_registration_step2() {
 					    	<option value="10">10+ Years</option>
 					    </select>
 					</td><td>
-					    <select id="addressmonths" name="addressmonths" class="form-control" data-parsley-id="5957">
+					    <select id="addressmonths" name="addressmonths" class="form-control">
 					    	<option value="0">0 Months</option>
 					    	<option value="1">1 Month</option>
 					    	<option value="2">2 Months</option>
@@ -448,11 +448,11 @@ function minibond_registration_step2() {
 					    	<option value="8">8 Months</option>
 					    	<option value="9">9 Months</option>
 					    	<option value="10">11 Months</option>
-					    </select><ul class="parsley-errors-list" id="parsley-id-5957"></ul>
+					    </select>
 					</td></tr>
 					<tr><td colspan="2">
 					</td></tr></tbody></table>
-					<div id="timeerror"><ul class="parsley-errors-list" id="parsley-id-0883"></ul></div>
+                    <div id="timeerror"></div>
 				</div>
 			</div>
 		</div>
@@ -487,21 +487,21 @@ function minibond_registration_step3() {
                             <input type="password" class="form-control" id="password" name="password" value="" data-parsley-minlength="6" data-parsley-pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$" data-parsley-error-message="Your password must: <br>
                             Be atleast 6 characters<br>
                             Contain upper and lowercase characters<br>
-                            Contain characters and numbers" required="" maxlength="150" data-parsley-id="3242"><ul class="parsley-errors-list" id="parsley-id-3242"></ul>
+                            Contain characters and numbers" required="" maxlength="150" />
                         </div>
                         <div class="form-group">
                             <label for="passwordconfirm">Confirm Password:</label>
-                            <input type="password" class="form-control" id="passwordconfirm" size="2" value="" name="passwordconfirm" data-parsley-equalto="#password" data-parsley-error-message="Passwords do not match" required="" maxlength="150" data-parsley-id="1634"><ul class="parsley-errors-list" id="parsley-id-1634"></ul>
+                            <input type="password" class="form-control" id="passwordconfirm" size="2" value="" name="passwordconfirm" data-parsley-equalto="#password" data-parsley-error-message="Passwords do not match" required="" maxlength="150" />
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="securityquestion">Security Question:</label>
-                            <input type="text" class="form-control" id="securityquestion" name="securityquestion" value="" data-parsley-required="true" data-parsley-error-message="Please enter a security question" maxlength="250" data-parsley-id="6793"><ul class="parsley-errors-list" id="parsley-id-6793"></ul>
+                            <input type="text" class="form-control" id="securityquestion" name="securityquestion" value="" data-parsley-required="true" data-parsley-error-message="Please enter a security question" maxlength="250" />
                         </div>
                         <div class="form-group">
                             <label for="securityanswer">Security Answer:</label>
-                            <input type="text" class="form-control" id="securityanswer" name="securityanswer" value="" data-parsley-required="true" data-parsley-error-message="Please enter an answer to your security question" maxlength="250" data-parsley-id="5797"><ul class="parsley-errors-list" id="parsley-id-5797"></ul>
+                            <input type="text" class="form-control" id="securityanswer" name="securityanswer" value="" data-parsley-required="true" data-parsley-error-message="Please enter an answer to your security question" maxlength="250" />
                         </div>
                     </div>
                 </div>
@@ -509,10 +509,17 @@ function minibond_registration_step3() {
                     <div class="col-xs-12 agreeterms">
                         <h2 class="smaller form-title">CUSTOMER AGREEMENT</h2>
                         <table border="0" class="agreeterms">
-                            <tbody><tr><td><input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" data-parsley-id="5504"></td><td>I confirm that I agree to the <a href="#" target="_blank">Lender Agreement</a>.</td></tr>
-                            <tr><td colspan="2"><div id="agreelendererror"><ul class="parsley-errors-list" id="parsley-id-multiple-agreelender"></ul></div></td></tr>
-                            <tr><td><input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" data-parsley-id="5471"></td><td>I confirm that I have read the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Website Terms of Use</a> and <a href="#" target="_blank">Cookie Policy</a>.</td></tr>
-                            <tr><td colspan="2"><div id="agreeothererror"><ul class="parsley-errors-list" id="parsley-id-multiple-agreeother"></ul></div></td></tr>
+                            <tbody>
+                            <tr>
+                                <td><input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" /></td><td>I confirm that I agree to the <a href="#" target="_blank">Lender Agreement</a>.
+                                </td>
+                            </tr>
+                            <tr><td colspan="2"><div id="agreelendererror"></div></td></tr>
+                            <tr>
+                                <td><input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" /></td>
+                                <td>I confirm that I have read the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Website Terms of Use</a> and <a href="#" target="_blank">Cookie Policy</a>.</td>
+                            </tr>
+                            <tr><td colspan="2"><div id="agreeothererror"></div></td></tr>
                         </tbody></table>
                     </div>
                 </div>
@@ -522,56 +529,55 @@ function minibond_registration_step3() {
                         <h2 class="smaller form-title" style="padding:12px 0px;">FINANCIAL INFORMATION</h2>
                         <span>We are required to understand your financial situation for the purposes of financial crime prevention.</span>
                         <table border="0" class="agreeterms">
-                            <tbody><tr>
-                            <td style="width: 350px;">
-                            <span>Please confirm your approximate net worth</span>
-                            <span style="display: block; font-size: 12px;">(excluding your primary residence)</span>
-                            </td>
-                            <td>
-                            <select name="networth" class="form-control" id="networth" data-parsley-required="true" data-parsley-error-message="Please select a valid approximate net worth" data-parsley-errors-container="#networtherror" style="display: none;" data-parsley-id="9018">
-                                <option value="">Select</option>
-                                <option value="1">Under £35,000</option>
-                                <option value="2">£35,000 - £100,000</option>
-                                <option value="3">£100,000 - £250,000</option>
-                                <option value="4">£250,000 - £500,000</option>
-                                <option value="5">£500,000 +</option>
-                            </select></td>
-                            </tr>
-                            <tr><td><div id="networtherror"><ul class="parsley-errors-list" id="parsley-id-9018"></ul></div></td></tr>
-                            <tr><td>&nbsp;</td></tr>
+                            <tbody>
                             <tr>
-                            <td>
-                            <span>Please confirm the source of the funds that</span>
-                            <span style="display: block;">you wish to invest</span>
-                            </td>
-                            <td>
-                            
-                            <select name="fundsource" class="form-control" id="fundsource" data-parsley-required="true" data-parsley-error-message="Please select a valid fund source" data-parsley-errors-container="#fundsourceerror" data-parsley-id="4768">
-                                <option value="">Select</option>
-                                <option value="1" displayother="0">Savings from employment income</option>
-                                <option value="2" displayother="0">Profits from your business</option>
-                                <option value="3" displayother="0">Retirement income</option>
-                                <option value="4" displayother="0">Pension fund encashment</option>
-                                <option value="5" displayother="0">Maturing investments / sale of investments</option>
-                                <option value="6" displayother="0">Fixed deposit savings</option>
-                                <option value="7" displayother="0">Property sale</option>
-                                <option value="8" displayother="0">Company sale or sale of an interest in company </option>
-                                <option value="9" displayother="0">Inheritance</option>
-                                <option value="10" displayother="0">Loan</option>
-                                <option value="11" displayother="0">Divorce settlement</option>
-                                <option value="12" displayother="0">Gift</option>
-                                <option value="13" displayother="1">Other income sources (please state)</option>
-                            </select>
-                            
-                            </td>
+                                <td style="width: 350px;">
+                                    <span>Please confirm your approximate net worth</span>
+                                    <span style="display: block; font-size: 12px;">(excluding your primary residence)</span>
+                                </td>
+                                <td>
+                                    <select name="networth" class="form-control" id="networth" data-parsley-required="true" data-parsley-error-message="Please select a valid approximate net worth" data-parsley-errors-container="#networtherror" style="display: none;">
+                                        <option value="">Select</option>
+                                        <option value="1">Under £35,000</option>
+                                        <option value="2">£35,000 - £100,000</option>
+                                        <option value="3">£100,000 - £250,000</option>
+                                        <option value="4">£250,000 - £500,000</option>
+                                        <option value="5">£500,000 +</option>
+                                    </select>
+                                    <div id="networtherror"></div>
+                                </td>
                             </tr>
-                            <tr><td><div id="fundsourceerror"><ul class="parsley-errors-list" id="parsley-id-4768"></ul></div></td></tr>
+                            <tr>
+                                <td>
+                                    <span>Please confirm the source of the funds that</span>
+                                    <span style="display: block;">you wish to invest</span>
+                                </td>
+                                <td>
+                                    <select name="fundsource" class="form-control" id="fundsource" data-parsley-required="true" data-parsley-error-message="Please select a valid fund source" data-parsley-errors-container="#fundsourceerror" />
+                                        <option value="">Select</option>
+                                        <option value="1" displayother="0">Savings from employment income</option>
+                                        <option value="2" displayother="0">Profits from your business</option>
+                                        <option value="3" displayother="0">Retirement income</option>
+                                        <option value="4" displayother="0">Pension fund encashment</option>
+                                        <option value="5" displayother="0">Maturing investments / sale of investments</option>
+                                        <option value="6" displayother="0">Fixed deposit savings</option>
+                                        <option value="7" displayother="0">Property sale</option>
+                                        <option value="8" displayother="0">Company sale or sale of an interest in company </option>
+                                        <option value="9" displayother="0">Inheritance</option>
+                                        <option value="10" displayother="0">Loan</option>
+                                        <option value="11" displayother="0">Divorce settlement</option>
+                                        <option value="12" displayother="0">Gift</option>
+                                        <option value="13" displayother="1">Other income sources (please state)</option>
+                                    </select>
+                                    <div id="fundsourceerror"></div>
+                                </td>
+                            </tr>
                             <tr style="display: none;" class="otherfundsourcerows"><td>&nbsp;</td></tr>
                             <tr style="display: none;" class="otherfundsourcerows">
                             <td>Other Fund Source</td>
                             <td><input type="text" name="otherfundsource" id="otherfundsource" class="form-control" style="width: 350px;" data-parsley-otherfundsourceconditional="" data-parsley-validate-if-empty="" data-parsley-otherfundsourceconditional-message="Please enter a valid other fund source" data-parsley-errors-container="#otherfundsourceerror" data-parsley-id="0848"></td>
                             </tr>
-                            <tr><td><div id="otherfundsourceerror"><ul class="parsley-errors-list" id="parsley-id-0848"></ul></div></td></tr>
+                            <tr><td></td></tr>
                         </tbody></table>
                     </div>
                 </div>
@@ -603,7 +609,7 @@ function minibond_registration_step4() {
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="email">Username / Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722"><ul class="parsley-errors-list" id="parsley-id-5722"></ul>
+                            <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722">
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6">
@@ -612,7 +618,7 @@ function minibond_registration_step4() {
                             <input type="password" class="form-control" id="password" name="password" value="" data-parsley-minlength="6" data-parsley-pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$" data-parsley-error-message="Your password must: <br>
                             Be atleast 6 characters<br>
                             Contain upper and lowercase characters<br>
-                            Contain characters and numbers" required="" maxlength="150" data-parsley-id="3242"><ul class="parsley-errors-list" id="parsley-id-3242"></ul>
+                            Contain characters and numbers" required="" maxlength="150" data-parsley-id="3242">
                         </div>
                     </div>
                 </div>

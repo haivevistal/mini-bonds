@@ -25,12 +25,16 @@ function mini_bonds_scripts() {
     /* add js libararies */
     wp_enqueue_script( 'bootstrap_js', plugins_url( 'assets/bootstrap/js/bootstrap.min.js', __FILE__ ) , array(), '3.3.5', true );
     wp_enqueue_script( 'jqueryui_js', plugins_url( 'assets/jquery-ui-1.11.4/jquery-ui.min.js', __FILE__ ) , array(), '1.11.4', true );
+    wp_enqueue_script( 'parsley_js', plugins_url( 'assets/js/Parsley.js-2.2.0/dist/parsley.min.js', __FILE__ ) , array(), '2.2.0', true );
+    wp_enqueue_script( 'selectBoxit_js', plugins_url( 'assets/js/jquery.selectBoxIt/src/javascripts/jquery.selectBoxIt.min.js', __FILE__ ) , array(), '3.8.1', true );
     wp_enqueue_script( 'minibond_js', plugins_url( 'assets/js/main.js', __FILE__ ) , array(), '1.0.0', true );
     /* add css libraries */
     wp_register_style( 'bootstrap_css', plugins_url( 'assets/bootstrap/css/bootstrap.min.css', __FILE__ ), false, '3.3.5' );
     wp_enqueue_style( 'bootstrap_css' );
     wp_register_style( 'jqueryui_css', plugins_url( 'assets/jquery-ui-1.11.4/jquery-ui.min.css', __FILE__ ), false, '1.11.4' );
     wp_enqueue_style( 'jqueryui_css' );
+    wp_register_style( 'selectBoxit_css', plugins_url( 'assets/js/jquery.selectBoxIt/src/stylesheets/jquery.selectBoxIt.css', __FILE__ ), false, '3.8.1' );
+    wp_enqueue_style( 'selectBoxit_css' );
     wp_register_style( 'minibond_css', plugins_url( 'assets/css/main.css', __FILE__ ), false, '1.0.0' );
     wp_enqueue_style( 'minibond_css' );
 }
