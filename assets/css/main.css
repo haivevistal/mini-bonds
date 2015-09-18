@@ -4,7 +4,7 @@ body{padding-top:50px;font-family: "Roboto", sans-serif !important;font-size: 14
 .registration-container { border: 1px solid #e1e1e1;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;padding: 15px;}
 h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !important;}
 .form-title { font-size: 24px !important;}
-#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue{background: url(../../img/btn_next.png);width: 108px;height: 50px;border: none;background-repeat: no-repeat;float: right;}
+#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue{background: url(../../img/btn_next.png);width: 108px;height: 50px;border: none;background-repeat: no-repeat;float: right;outline:0;}
 #minibonds-registrationForm  table, #minibonds-registrationForm  td, .step2-form table, .step2-form td, .step3-form table, .step3-form td { border: 0 !important;}
 .step2-form, .step3-form, .step4-form { margin-top: 35px;}
 .parsley-errors-list, .parsley-errors-list li { list-style-type: none !important;padding-left: 0px !important;color: #bc1437;}
@@ -12,3 +12,9 @@ h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !imp
 #birthdayerror ul { height: 0px !important;}
 #minibonds-registrationForm table, .step2-form table, .step3-form table, .step4-form table { margin-bottom: 0px !important; }
 .form-group {margin-bottom: 20px !important;}
+.financiainformation .col-md-5 span { line-height: 16px !important; }
+#minibonds-registrationForm .fa, .step2-form  .fa, .step3-form  .fa, .step4-form  .fa { font-size: 18px !important ;}
+#minibonds-registrationForm .fa-complete, .step2-form  .fa-complete, .step3-form  .fa-complete, .step4-form  .fa-complete { color: #60b044; } 
+.nopadding { padding: 0 !important;}
+.step4_footer a{line-height: 22px;}
+#fundsourceSelectBoxIt, #networthSelectBoxIt { width: 268px !important; }

@@ -1,18 +1,76 @@
 <?php
-
+/* mini-bonds registration */
 function minibond_registration($atts) {
+    
     $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
-    $step = isset( $segments[1] ) && $segments[1] != '' ? $segments[1] : '1';
+
+    $count_segments = count($segments) - 1;
+
+    $step = is_numeric( $segments[ $count_segments ] ) ? $segments[ $count_segments ] : '1';
+    
+    $minibonds_helper = new MiniBondsHelper;
+    
+    $register_url = get_page_link($pageid);
+    
+    $pageid = get_the_ID();
+    
+    $minibonds_helper->mini_bonds_save_session( 'register_url', $register_url );
+
     if( $step == '1' ) {
+        if( isset($_POST['step1']) ) {
+            $minibonds_helper->mini_bonds_savepost('form1', $_POST );
+            $minibonds_helper->mini_bonds_save_session( 'step1', 'success' );
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
+        }
         minibond_registration_step1();
+        
     } else if( $step == '2' ) {
+        
+        if( isset($_POST['step2']) ) {
+            $minibonds_helper->mini_bonds_savepost('form2', $_POST );
+            $minibonds_helper->mini_bonds_save_session( 'step2', 'success' );
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'3/' );
+        }
+        
+        if( $minibonds_helper->mini_bonds_get_session('step1') !='success' ) {
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url );
+        }
         minibond_registration_step2();
+        
     } else if( $step == '3' ) {
+        
+        if( isset($_POST['step3']) ) {
+            $minibonds_helper->mini_bonds_savepost('form3', $_POST );
+            $minibonds_helper->mini_bonds_save_session( 'step3', 'success' );
+            $minibonds_helper->mini_bonds_add_people_to_crm();
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
+        }
+        
+        if( $minibonds_helper->mini_bonds_get_session('step2') !='success' ) {
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
+        }
         minibond_registration_step3();
+        
     } else if( $step == '4' ) {
+
+        if( isset($_POST['step4']) ) {
+            $minibonds_helper->mini_bonds_savepost('form4', $_POST, '');
+            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
+        }
+        
+        if( $minibonds_helper->mini_bonds_get_session('step3') !='success' ) {
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'3/' );
+        }
         minibond_registration_step4();
+        
     } else {
+        if( isset($_POST['step1']) ) {
+            $minibonds_helper->mini_bonds_savepost('form1', $_POST );
+            $minibonds_helper->mini_bonds_save_session( 'step1', 'success' );
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
+        }
         minibond_registration_step1();
+        
     }
 }
 
@@ -33,6 +91,7 @@ function minibond_registration_step1() {
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
             <form method="post" name="minibonds-registrationForm" id="minibonds-registrationForm" role="form" novalidate="">
+                <input type="hidden" name="step1" value="true" />
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
@@ -137,7 +196,9 @@ function minibond_registration_step2() {
             <span>Please provide us with your address so that we may electronically verify your identity.</span>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+        <input type="hidden" value="<?php echo wp_create_nonce( 'getukaddress' ); ?>" id="ukaddress_nonce" />
         <form method="post" data-parsley-validate="" role="form" novalidate="" class="step2-form">
+            <input type="hidden" name="step2" value="true" />
             <div class="row">
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
@@ -167,8 +228,8 @@ function minibond_registration_step2() {
 					<input type="text" class="form-control" id="county" name="county" data-parsley-required="true" data-parsley-error-message="Please enter a county" value="" />
 				</div>
 				<div class="form-group">
-					<label for="addresscountry">Country:</label>
-				    	<select id="addresscountry" data-parsley-required="true" class="form-control" name="addresscountry" />
+					<label for="addresscountry" class="col-md-12 col-xs-12 nopadding">Country:</label>
+				    <select id="addresscountry" data-parsley-required="true" class="form-control" name="addresscountry" />
 				    	<option value="305">Afghanistan</option>
 				    	<option value="436">Aland Islands</option>
 				    	<option value="327">Albania</option>
@@ -480,6 +541,7 @@ function minibond_registration_step3() {
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
             <form method="post" data-parsley-validate="" role="form" novalidate="" class="step3-form">
+                <input type="hidden" name="step3" value="true" />
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
@@ -506,8 +568,8 @@ function minibond_registration_step3() {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 agreeterms">
-                        <h2 class="smaller form-title">CUSTOMER AGREEMENT</h2>
+                    <div class="col-xs-12 col-md-6 agreeterms">
+                        <h2 class="smaller form-title" style="padding:12px 0px;">CUSTOMER AGREEMENT</h2>
                         <table border="0" class="agreeterms">
                             <tbody>
                             <tr>
@@ -522,56 +584,53 @@ function minibond_registration_step3() {
                             <tr><td colspan="2"><div id="agreeothererror"></div></td></tr>
                         </tbody></table>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12 financiainformation">
+                    <div class="col-xs-12 col-md-6 financiainformation">
                         <h2 class="smaller form-title" style="padding:12px 0px;">FINANCIAL INFORMATION</h2>
                         <span>We are required to understand your financial situation for the purposes of financial crime prevention.</span>
+                        <div class="col-xs-12 col-md-12" style="padding:20px 0;">
+                            <div class="col-xs-12 col-md-6" style="padding:0;">
+                                <span>Please confirm your approximate net worth</span>
+                                <span style="display: block; font-size: 12px;">(excluding your primary residence)</span>
+                            </div>
+                            <div class="col-xs-12 col-md-6" style="padding:0;">
+                                <select name="networth" class="form-control" id="networth" data-parsley-required="true" data-parsley-error-message="Please select a valid approximate net worth" data-parsley-errors-container="#networtherror" style="display: none;">
+                                    <option value="">Select</option>
+                                    <option value="1">Under &pound;35,000</option>
+                                    <option value="2">&pound;35,000 - &pound;100,000</option>
+                                    <option value="3">&pound;100,000 - &pound;250,000</option>
+                                    <option value="4">&pound;250,000 - &pound;500,000</option>
+                                    <option value="5">&pound;500,000 +</option>
+                                </select>
+                                <div id="networtherror"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12" style="padding:0;">
+                            <div class="col-xs-12 col-md-6" style="padding:0;">
+                                <span>Please confirm the source of the funds that</span>
+                                <span style="display: block;">you wish to invest</span>
+                            </div>
+                            <div class="col-xs-12 col-md-6" style="padding:0;">
+                                <select name="fundsource" class="form-control" id="fundsource" data-parsley-required="true" data-parsley-error-message="Please select a valid fund source" data-parsley-errors-container="#fundsourceerror" />
+                                    <option value="">Select</option>
+                                    <option value="1" displayother="0">Savings from employment income</option>
+                                    <option value="2" displayother="0">Profits from your business</option>
+                                    <option value="3" displayother="0">Retirement income</option>
+                                    <option value="4" displayother="0">Pension fund encashment</option>
+                                    <option value="5" displayother="0">Maturing investments / sale of investments</option>
+                                    <option value="6" displayother="0">Fixed deposit savings</option>
+                                    <option value="7" displayother="0">Property sale</option>
+                                    <option value="8" displayother="0">Company sale or sale of an interest in company </option>
+                                    <option value="9" displayother="0">Inheritance</option>
+                                    <option value="10" displayother="0">Loan</option>
+                                    <option value="11" displayother="0">Divorce settlement</option>
+                                    <option value="12" displayother="0">Gift</option>
+                                    <option value="13" displayother="1">Other income sources (please state)</option>
+                                </select>
+                                <div id="fundsourceerror"></div>
+                            </div>
+                        </div>
                         <table border="0" class="agreeterms">
                             <tbody>
-                            <tr>
-                                <td style="width: 350px;">
-                                    <span>Please confirm your approximate net worth</span>
-                                    <span style="display: block; font-size: 12px;">(excluding your primary residence)</span>
-                                </td>
-                                <td>
-                                    <select name="networth" class="form-control" id="networth" data-parsley-required="true" data-parsley-error-message="Please select a valid approximate net worth" data-parsley-errors-container="#networtherror" style="display: none;">
-                                        <option value="">Select</option>
-                                        <option value="1">Under £35,000</option>
-                                        <option value="2">£35,000 - £100,000</option>
-                                        <option value="3">£100,000 - £250,000</option>
-                                        <option value="4">£250,000 - £500,000</option>
-                                        <option value="5">£500,000 +</option>
-                                    </select>
-                                    <div id="networtherror"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>Please confirm the source of the funds that</span>
-                                    <span style="display: block;">you wish to invest</span>
-                                </td>
-                                <td>
-                                    <select name="fundsource" class="form-control" id="fundsource" data-parsley-required="true" data-parsley-error-message="Please select a valid fund source" data-parsley-errors-container="#fundsourceerror" />
-                                        <option value="">Select</option>
-                                        <option value="1" displayother="0">Savings from employment income</option>
-                                        <option value="2" displayother="0">Profits from your business</option>
-                                        <option value="3" displayother="0">Retirement income</option>
-                                        <option value="4" displayother="0">Pension fund encashment</option>
-                                        <option value="5" displayother="0">Maturing investments / sale of investments</option>
-                                        <option value="6" displayother="0">Fixed deposit savings</option>
-                                        <option value="7" displayother="0">Property sale</option>
-                                        <option value="8" displayother="0">Company sale or sale of an interest in company </option>
-                                        <option value="9" displayother="0">Inheritance</option>
-                                        <option value="10" displayother="0">Loan</option>
-                                        <option value="11" displayother="0">Divorce settlement</option>
-                                        <option value="12" displayother="0">Gift</option>
-                                        <option value="13" displayother="1">Other income sources (please state)</option>
-                                    </select>
-                                    <div id="fundsourceerror"></div>
-                                </td>
-                            </tr>
                             <tr style="display: none;" class="otherfundsourcerows"><td>&nbsp;</td></tr>
                             <tr style="display: none;" class="otherfundsourcerows">
                             <td>Other Fund Source</td>
@@ -600,19 +659,33 @@ function minibond_registration_step4() {
             </div>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
-            <h2 class="smaller form-title" style="padding:12px 0px;">Registration Complete</h2>
+            <h2 class="smaller form-title" style="padding:12px 0px;">Success! Registration Complete</h2>
+            <span>Congratulations, you have now completed first part of the process.</span>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
             <form method="post" data-parsley-validate="" role="form" novalidate="" class="step4-form">
-                <h2 class="smaller form-title">Thank you, your registration was successful. Please login into your account.</h2>
+                <input type="hidden" name="step4" value="true" />
                 <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <h2 class="smaller form-title" style="padding:8px 0;">Thank you for Registering.</h2>
+                        <ul style="list-style-type:none;">
+                            <li><i class="fa fa-check fa-complete"></i> Complete registration forms.</li>
+                            <li><i class="fa fa-check"></i> Login and fill financial details.</li>
+                            <li><i class="fa fa-check"></i> Complete your payment.</li>
+                        </ul>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="well">
+                                <strong>Customer Support</strong><br />
+                                <a href="tel:98080707">98080707</a><br />
+                                <a href="mailto:example@domain.com">example@domain.com</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="email">Username / Email:</label>
                             <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722">
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" value="" data-parsley-minlength="6" data-parsley-pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$" data-parsley-error-message="Your password must: <br>
@@ -621,8 +694,18 @@ function minibond_registration_step4() {
                             Contain characters and numbers" required="" maxlength="150" data-parsley-id="3242">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-md-6 step4_footer pull-right">
+                        <div class="col-xs-12 col-md-12 nopadding">
+                            <div class="col-xs-12 col-md-6 nopadding">
+                                <a href="#">Forgot your password?</a><br />
+                                Not registered?<a href="<?php echo $_SESSION['register_url']; ?>">Register here</a>
+                            </div>
+                            <div class="col-xs-12 col-md-6 nopadding">
+                                <input type="submit" class="continue" value="" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <input type="submit" class="continue" value="" />
             </form>
         </div>
     </div>

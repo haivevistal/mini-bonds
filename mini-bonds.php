@@ -35,12 +35,22 @@ function mini_bonds_scripts() {
     wp_enqueue_style( 'jqueryui_css' );
     wp_register_style( 'selectBoxit_css', plugins_url( 'assets/js/jquery.selectBoxIt/src/stylesheets/jquery.selectBoxIt.css', __FILE__ ), false, '3.8.1' );
     wp_enqueue_style( 'selectBoxit_css' );
+    wp_register_style( 'fontawesome_css', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', false, '4.4.0' );
+    wp_enqueue_style( 'fontawesome_css' );
     wp_register_style( 'minibond_css', plugins_url( 'assets/css/main.css', __FILE__ ), false, '1.0.0' );
     wp_enqueue_style( 'minibond_css' );
 }
 
 add_action( 'wp_enqueue_scripts', 'mini_bonds_scripts' );
 
+add_action('init', 'mini_bonds_start_session', 1);
+function mini_bonds_start_session() {
+    if(!session_id() || session_id() == '' ) {
+        session_start();
+    }
+}
+
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-functions.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-shortcodes.php');
