@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Plugin Name: Mini-Bonds-Form
+* Plugin Name: Mini-Bonds
 * Plugin URI: http://www.thecoapperative.com/
 * Description: Connect mini-sites into one login, data is stored in central database. Provides unique registration form to all mini-sites, details are stored into CRM and email into mailchimp.
 * Version: 1.0.0
@@ -18,7 +18,7 @@ function mini_bonds_setting() {
 }
 
 function mini_bonds() {
-    
+    echo 'starts here';
 }
 
 function mini_bonds_scripts() {

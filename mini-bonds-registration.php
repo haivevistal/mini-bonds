@@ -10,15 +10,15 @@ function minibond_registration($atts) {
     
     $minibonds_helper = new MiniBondsHelper;
     
-    $register_url = get_page_link($pageid);
-    
     $pageid = get_the_ID();
+    
+    $register_url = get_page_link($pageid);
     
     $minibonds_helper->mini_bonds_save_session( 'register_url', $register_url );
 
     if( $step == '1' ) {
         if( isset($_POST['step1']) ) {
-            $minibonds_helper->mini_bonds_savepost('form1', $_POST );
+            $minibonds_helper->mini_bonds_save_session('form1', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step1', 'success' );
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
         }
@@ -27,7 +27,7 @@ function minibond_registration($atts) {
     } else if( $step == '2' ) {
         
         if( isset($_POST['step2']) ) {
-            $minibonds_helper->mini_bonds_savepost('form2', $_POST );
+            $minibonds_helper->mini_bonds_save_session('form2', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step2', 'success' );
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'3/' );
         }
@@ -40,9 +40,9 @@ function minibond_registration($atts) {
     } else if( $step == '3' ) {
         
         if( isset($_POST['step3']) ) {
-            $minibonds_helper->mini_bonds_savepost('form3', $_POST );
+            $minibonds_helper->mini_bonds_save_session('form3', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step3', 'success' );
-            $minibonds_helper->mini_bonds_add_people_to_crm();
+            $minibonds_helper->mini_bonds_add_people_to_zoho_crm();
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
         }
         
@@ -52,9 +52,8 @@ function minibond_registration($atts) {
         minibond_registration_step3();
         
     } else if( $step == '4' ) {
-
         if( isset($_POST['step4']) ) {
-            $minibonds_helper->mini_bonds_savepost('form4', $_POST, '');
+            $minibonds_helper->mini_bonds_save_session('form4', $_POST);
             $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
         }
         
@@ -65,7 +64,7 @@ function minibond_registration($atts) {
         
     } else {
         if( isset($_POST['step1']) ) {
-            $minibonds_helper->mini_bonds_savepost('form1', $_POST );
+            $minibonds_helper->mini_bonds_save_session('form1', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step1', 'success' );
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
         }
@@ -484,31 +483,31 @@ function minibond_registration_step2() {
 					<tbody><tr><td>
 					    <select id="addressyears" name="addressyears" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter how long you have lived at this address" data-parsley-errors-container="#timeerror">
 					    	<option value="">Years</option>
-					    	<option value="0">0 Years</option>
-					    	<option value="1">1 Year</option>
-					    	<option value="2">2 Years</option>
-					    	<option value="3">3 Years</option>
-					    	<option value="4">4 Years</option>
-					    	<option value="5">5 Years</option>
-					    	<option value="6">6 Years</option>
-					    	<option value="7">7 Years</option>
-					    	<option value="8">8 Years</option>
-					    	<option value="9">9 Years</option>
-					    	<option value="10">10+ Years</option>
+					    	<option value="0 Years">0 Years</option>
+					    	<option value="1 Years">1 Year</option>
+					    	<option value="2 Years">2 Years</option>
+					    	<option value="3 Years">3 Years</option>
+					    	<option value="4 Years">4 Years</option>
+					    	<option value="5 Years">5 Years</option>
+					    	<option value="6 Years">6 Years</option>
+					    	<option value="7 Years">7 Years</option>
+					    	<option value="8 Years">8 Years</option>
+					    	<option value="9 Years">9 Years</option>
+					    	<option value="10 Years">10+ Years</option>
 					    </select>
 					</td><td>
 					    <select id="addressmonths" name="addressmonths" class="form-control">
-					    	<option value="0">0 Months</option>
-					    	<option value="1">1 Month</option>
-					    	<option value="2">2 Months</option>
-					    	<option value="3">3 Months</option>
-					    	<option value="4">4 Months</option>
-					    	<option value="5">5 Months</option>
-					    	<option value="6">6 Months</option>
-					    	<option value="7">7 Months</option>
-					    	<option value="8">8 Months</option>
-					    	<option value="9">9 Months</option>
-					    	<option value="10">11 Months</option>
+					    	<option value="0 Months">0 Months</option>
+					    	<option value="1 Months">1 Month</option>
+					    	<option value="2 Months">2 Months</option>
+					    	<option value="3 Months">3 Months</option>
+					    	<option value="4 Months">4 Months</option>
+					    	<option value="5 Months">5 Months</option>
+					    	<option value="6 Months">6 Months</option>
+					    	<option value="7 Months">7 Months</option>
+					    	<option value="8 Months">8 Months</option>
+					    	<option value="9 Months">9 Months</option>
+					    	<option value="10 Months">11 Months</option>
 					    </select>
 					</td></tr>
 					<tr><td colspan="2">
@@ -595,11 +594,11 @@ function minibond_registration_step3() {
                             <div class="col-xs-12 col-md-6" style="padding:0;">
                                 <select name="networth" class="form-control" id="networth" data-parsley-required="true" data-parsley-error-message="Please select a valid approximate net worth" data-parsley-errors-container="#networtherror" style="display: none;">
                                     <option value="">Select</option>
-                                    <option value="1">Under &pound;35,000</option>
-                                    <option value="2">&pound;35,000 - &pound;100,000</option>
-                                    <option value="3">&pound;100,000 - &pound;250,000</option>
-                                    <option value="4">&pound;250,000 - &pound;500,000</option>
-                                    <option value="5">&pound;500,000 +</option>
+                                    <option value="Under &pound;35,000">Under &pound;35,000</option>
+                                    <option value="&pound;35,000 - &pound;100,000">&pound;35,000 - &pound;100,000</option>
+                                    <option value="&pound;100,000 - &pound;250,000">&pound;100,000 - &pound;250,000</option>
+                                    <option value="&pound;250,000 - &pound;500,000">&pound;250,000 - &pound;500,000</option>
+                                    <option value="&pound;500,000 +">&pound;500,000 +</option>
                                 </select>
                                 <div id="networtherror"></div>
                             </div>
@@ -612,19 +611,19 @@ function minibond_registration_step3() {
                             <div class="col-xs-12 col-md-6" style="padding:0;">
                                 <select name="fundsource" class="form-control" id="fundsource" data-parsley-required="true" data-parsley-error-message="Please select a valid fund source" data-parsley-errors-container="#fundsourceerror" />
                                     <option value="">Select</option>
-                                    <option value="1" displayother="0">Savings from employment income</option>
-                                    <option value="2" displayother="0">Profits from your business</option>
-                                    <option value="3" displayother="0">Retirement income</option>
-                                    <option value="4" displayother="0">Pension fund encashment</option>
-                                    <option value="5" displayother="0">Maturing investments / sale of investments</option>
-                                    <option value="6" displayother="0">Fixed deposit savings</option>
-                                    <option value="7" displayother="0">Property sale</option>
-                                    <option value="8" displayother="0">Company sale or sale of an interest in company </option>
-                                    <option value="9" displayother="0">Inheritance</option>
-                                    <option value="10" displayother="0">Loan</option>
-                                    <option value="11" displayother="0">Divorce settlement</option>
-                                    <option value="12" displayother="0">Gift</option>
-                                    <option value="13" displayother="1">Other income sources (please state)</option>
+                                    <option value="Savings from employment income" displayother="0">Savings from employment income</option>
+                                    <option value="Profits from your business" displayother="0">Profits from your business</option>
+                                    <option value="Retirement income" displayother="0">Retirement income</option>
+                                    <option value="Pension fund encashment" displayother="0">Pension fund encashment</option>
+                                    <option value="Maturing investments / sale of investments" displayother="0">Maturing investments / sale of investments</option>
+                                    <option value="Fixed deposit savings" displayother="0">Fixed deposit savings</option>
+                                    <option value="Property sale" displayother="0">Property sale</option>
+                                    <option value="Company sale or sale of an interest in company" displayother="0">Company sale or sale of an interest in company </option>
+                                    <option value="Inheritance" displayother="0">Inheritance</option>
+                                    <option value="Loan" displayother="0">Loan</option>
+                                    <option value="Divorce settlement" displayother="0">Divorce settlement</option>
+                                    <option value="Gift" displayother="0">Gift</option>
+                                    <option value="Other income sources (please state)" displayother="1">Other income sources (please state)</option>
                                 </select>
                                 <div id="fundsourceerror"></div>
                             </div>

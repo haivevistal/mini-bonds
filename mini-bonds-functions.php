@@ -43,92 +43,55 @@ class MiniBondsHelper {
         }
     }
     
-     /* 
-        @mini_bonds_savepost
-    */
-    function mini_bonds_savepost($name, $post) {
-        if( isset($post) ) {
-            $this->mini_bonds_save_session($name, $post);
-        }
-    }
-    
-    /* add new people in capsulecrm via PHP API library */
-    function mini_bonds_add_people_to_crm2() {
-        
-        require_once( plugin_dir_path( __FILE__ ).'lib/api/Services_Capsule/Services/Capsule.php' );
+    /* save details to Zoho CRM */
+    function mini_bonds_add_people_to_zoho_crm() {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
-        
-        try {
-            $capsule = new Services_Capsule($config['appName'], $config['token']);
-            
-            $people  = $capsule->party->people->getAll($config['partyId']);
-            
-            
-        } catch (Services_Capsule_Exception $e) {
-            print_r($e);
-            die();
-        }
-        var_dump($people);
-    }
-    
-    /* add new people in capsulecrm via custom curl */
-    function mini_bonds_add_people_to_crm() {
-        
-        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $token = $config['zoho_token'];
         
         /* get session post variables */
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
         $form3 = $this->mini_bonds_get_session('form3');
+        $myxml='<Contacts>
+            <row no="1">
+                <FL val="Contact Owner">Mini Bonds</FL>
+                <FL val="Salutation">'.$form1['settitle'].'</FL>
+                <FL val="First Name">'.$form1['firstname'].'</FL>
+                <FL val="Last Name">'.$form1['surname'].'</FL>
+                <FL val="Email">'.$form1['email'].'</FL>
+                <FL val="Title">Customer</FL>
+                <FL val="Department">Home</FL>
+                <FL val="Phone">'.$form1['homephone'].'</FL>
+                <FL val="Home Phone">'.$form1['homephone'].'</FL>
+                <FL val="Mobile">'.$form1['mobilephone'].'</FL>
+                <FL val="Date of Birth">'.$form1['setmonth'].'/'.$form1['birthdayday'].'/'.$form1['birthdayyear'].'</FL>
+                <FL val="Mailing House Number">'.$form2['housenumber'].'</FL>
+                <FL val="Mailing City">'.$form2['city'].'</FL>
+                <FL val="Mailing Street">'.$form2['street'].'</FL>
+                <FL val="Mailing Zip">'.$form2['postcode'].'</FL>
+                <FL val="Mailing Country">'.$form2['county'].'</FL>
+                <FL val="Username">'.$form1['email'].'</FL>
+                <FL val="Password">'.$form3['password'].'</FL>
+                <FL val="Security Question">'.$form3['securityquestion'].'</FL>
+                <FL val="Security Answer">'.$form3['securityanswer'].'</FL>
+                <FL val="Net Worth">'.$form3['networth'].'</FL>
+                <FL val="Fund Source">'.$form3['fundsource'].'</FL>
+                <FL val="Other Fund Source">'.$form3['otherfundsource'].'</FL>
+            </row>
+            </Contacts>';
         
-        $myxml="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n
-        <person>\n
-            <title>".$form1['settitle']."</title>\n
-            <firstName>".$form1['firstname']."</firstName>\n
-            <lastName>".$form1['surname']."</lastName>\n
-            <jobTitle>Customer</jobTitle>\n
-            <organisationName>".$config['organizationName']."</organisationName>\n
-            <contacts>
-                <email>
-                    <type>Home</type>
-                    <emailAddress>".$form1['email']."</emailAddress>
-                </email>
-                <phone>
-                    <type>Home</type>
-                    <phoneNumber>".$form1['homephone']."</phoneNumber>
-                </phone>
-                <phone>
-                    <type>Mobile</type>
-                    <phoneNumber>".$form1['mobilephone']."</phoneNumber>
-                </phone>
-                <address>
-                    <type>Home</type>
-                    <street>".$form2['street']."</street>\n
-                    <city>".$form2['city']."</city>\n
-                    <state>".$form2['country']."</state>\n
-                    <zip>".$form2['postcode']."</zip>\n
-                    <country>".$form2['country']."</country>\n
-                </address>
-            </contacts>
-            <about></about>\n
-        </person>";
-
-        $capsulepage =  'https://'.$config['appName'].'.capsulecrm.com/api/person';
-
-        $ch = curl_init($capsulepage);
-
-        $options = array(CURLOPT_USERPWD => $config['token'].':x',
-                    CURLOPT_HTTPHEADER => array('Content-Type: application/xml'),
-                    CURLOPT_HEADER => true,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => $myxml
-                        );
-        curl_setopt_array($ch, $options);
-
-        $response = curl_exec($ch);
-        $responseInfo = curl_getinfo($ch);
+        $url = "https://crm.zoho.com/crm/private/xml/Contacts/insertRecords";
+        $param= "authtoken=".$token."&scope=crmapi&newFormat=1&xmlData=".$myxml;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
         curl_close($ch);
+        echo $result;
     }
 }
 
