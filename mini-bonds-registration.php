@@ -155,7 +155,8 @@ function minibond_registration_step1() {
                         </div>
                         <div class="form-group">
                             <label for="emailconfirm">Confirm Email Address:</label>
-                            <input type="email" class="form-control" id="emailconfirm" name="emailconfirm" value="" data-parsley-required="true" data-parsley-error-message="Please confirm your email address" />
+                            <input type="email" class="form-control" id="emailconfirm" name="emailconfirm" value="" data-parsley-required="true" data-parsley-error-message="Please confirm your email address" data-parsley-equalto="#email" />
+                            <div class="parsley-custom-error-message emailvalidation" id="emailvalidation"></div>
                         </div>
                         <div class="form-group">
                             <label for="homephone">Home Phone:</label>

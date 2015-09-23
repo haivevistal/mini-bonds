@@ -2,7 +2,7 @@
     var mini_bonds_ajax = '/wp-admin/admin-ajax.php';
     $(document).ready( function() {
         $('#minibonds-registrationForm').parsley();
-            window.ParsleyValidator.addValidator('dobvalidation', function () {
+        window.ParsleyValidator.addValidator('dobvalidation', function () {
             if(!$("#selmonth").val()) {
                 window.ParsleyValidator.addMessage('en', 'dobvalidation', 'Please select a valid month');
                 return false;
