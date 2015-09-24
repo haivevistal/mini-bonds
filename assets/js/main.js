@@ -23,7 +23,7 @@
         }, 32);
     });
     $("select").selectBoxIt({});
-    $("#findaddress").click(function( e ) {e.preventDefault();findaddress("");});
+    //$("#findaddress").click(function( e ) {e.preventDefault();findaddress("");});
     function findaddress(p){
         $("#findaddress" + p ).val("Loading...");
         $.ajax({

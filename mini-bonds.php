@@ -52,5 +52,9 @@ function mini_bonds_start_session() {
 
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-functions.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form1.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form2.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form3.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form4.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-shortcodes.php');

@@ -18,3 +18,5 @@ h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !imp
 .nopadding { padding: 0 !important;}
 .step4_footer a{line-height: 22px;}
 #fundsourceSelectBoxIt, #networthSelectBoxIt { width: 268px !important; }
+.red { color: red; }
+#minibonds-registrationForm table td, .step2-form table td, .step3-form table td, .step4-form table td {padding: 7px 20px 7px 0 !important;}

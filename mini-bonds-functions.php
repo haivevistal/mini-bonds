@@ -43,6 +43,15 @@ class MiniBondsHelper {
         }
     }
     
+    /* a helper function to add selected for selected option */
+    function mini_bonds_is_selected($v1, $v2) {
+        if( $v1 == $v2 ) {
+            return 'selected="selected"';
+        } else {
+            return '';
+        }
+    }
+    
     /* save details to Zoho CRM */
     function mini_bonds_add_people_to_zoho_crm() {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
@@ -91,7 +100,27 @@ class MiniBondsHelper {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
         $result = curl_exec($ch);
         curl_close($ch);
-        echo $result;
+        $xml = simplexml_load_string($result);
+        return $xml;
+    }
+    
+    function mini_bonds_check_if_exist_zoho_crm($email) {
+        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $token = $config['zoho_token'];
+        
+        $url = "https://crm.zoho.com/crm/private/xml/Contacts/getSearchRecordsByPDC";
+        $param= "authtoken=".$token."&scope=crmapi&newFormat=1&selectColumns=Email&searchColumn=email&searchValue=".$email;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $xml = simplexml_load_string($result);
+        return $xml;
     }
 }
 
