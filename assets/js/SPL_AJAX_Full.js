@@ -91,7 +91,8 @@ function SPLGetAddressData(postcode,area)
     try
     {
       // initiate reading a file from the server
-      SPLxmlHttp.open("GET", "/wp-content/plugins/mini-bonds/SPLGetFullAddressStep1.php?postcode=" + escape(postcode), true);
+      var purl = jQuery('input[name="plugin_dir1"]').attr('value');
+      SPLxmlHttp.open("GET", purl + "?postcode=" + escape(postcode), true);
       SPLxmlHttp.onreadystatechange = SPLhandleRequestStateChange;
       SPLxmlHttp.send(null);
     }
@@ -114,7 +115,8 @@ function SPLAddressChange(AddressCombo) {
          // try to connect to the server
          try {
            // initiate reading a file from the server
-           SPLxmlHttp.open("GET", "/wp-content/plugins/mini-bonds/SPLGetFullAddressStep2.php?AddressID=" + AddressCombo.options[AddressCombo.selectedIndex].value, true);
+           var purl2 = jQuery('input[name="plugin_dir2"]').attr('value');
+           SPLxmlHttp.open("GET", purl2 + "?AddressID=" + AddressCombo.options[AddressCombo.selectedIndex].value, true);
            SPLxmlHttp.onreadystatechange = SPLhandleRequestStateChange;
            SPLxmlHttp.send(null);
          }

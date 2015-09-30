@@ -2,6 +2,8 @@
 
 function minibond_registration_step2() {
     ?>
+    <input type="hidden" name="plugin_dir1" value="<?php echo plugins_url( 'SPLGetFullAddressStep1.php', __FILE__ ); ?>" />
+    <input type="hidden" name="plugin_dir2" value="<?php echo plugins_url( 'SPLGetFullAddressStep2.php', __FILE__ ); ?>" />
     <script type="text/javascript" src="<?php echo plugins_url( 'assets/js/SPL_AJAX_Full.js', __FILE__ ); ?>"></script>
     <div class="row registration-container step2">
         <div class="col-xs-12 col-md-12 col-lg-12">
@@ -57,7 +59,7 @@ function minibond_registration_step2() {
 				</div>-->
 				<div class="form-group">
 					<label for="addresscountry" class="col-md-12 col-xs-12 nopadding">Country: <span class="red">*</span></label>
-				    <select id="addresscountry" data-parsley-required="true" class="form-control" name="addresscountry" />
+				    <select id="addresscountry" class="form-control" name="addresscountry" />
 				    	<option value="Afghanistan">Afghanistan</option>
 				    	<option value="Aland Islands">Aland Islands</option>
 				    	<option value="Albania">Albania</option>

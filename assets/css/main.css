@@ -6,10 +6,11 @@ h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !imp
 .form-title { font-size: 24px !important;}
 #minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue{background: url(../../img/btn_next.png);width: 108px;height: 50px;border: none;background-repeat: no-repeat;float: right;outline:0;}
 #minibonds-registrationForm  table, #minibonds-registrationForm  td, .step2-form table, .step2-form td, .step3-form table, .step3-form td { border: 0 !important;}
+#minibonds-registrationForm  td, .step2-form td, .step3-form td { padding: 7px 20px 7px 0 !important;background-color: #fff;}
 .step2-form, .step3-form, .step4-form { margin-top: 35px;}
 .parsley-errors-list, .parsley-errors-list li { list-style-type: none !important;padding-left: 0px !important;color: #bc1437;margin-left: 0 !important;}
 .parsley-error {background-color: #f5e3e7;}
-#birthdayerror ul { height: 0px !important;}
+#birthdayerror ul { height: 5px !important;}
 #minibonds-registrationForm table, .step2-form table, .step3-form table, .step4-form table { margin-bottom: 0px !important; }
 .form-group {margin-bottom: 20px !important;}
 .financiainformation .col-md-5 span { line-height: 16px !important; }
@@ -18,5 +19,7 @@ h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !imp
 .nopadding { padding: 0 !important;}
 .step4_footer a{line-height: 22px;}
 #fundsourceSelectBoxIt, #networthSelectBoxIt { width: 268px !important; }
+#selmonthSelectBoxItContainer, #selmonthSelectBoxIt{ width: 150px !important;}
+.investment-btn { margin-bottom: 5px !important;width: 100%; }
+.grayborder { border: 1px solid #ccc !important; border-radius: 6px !important; }
 .red { color: red; }
-#minibonds-registrationForm table td, .step2-form table td, .step3-form table td, .step4-form table td {padding: 7px 20px 7px 0 !important;}

@@ -56,5 +56,7 @@ include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form1.php'
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form2.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form3.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form4.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-investment-process-form.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-questionnaire-form.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-shortcodes.php');

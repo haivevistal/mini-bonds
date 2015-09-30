@@ -122,6 +122,57 @@ class MiniBondsHelper {
         $xml = simplexml_load_string($result);
         return $xml;
     }
+    
+    function loginUser($user, $pass) {
+        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $token = $config['zoho_token'];
+        
+        $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
+        $param= "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password,First Name,Last Name)&criteria=((Email:".$user.")AND(Password:".$pass."))";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $array = json_decode($result);
+        return $array->response->result;
+    }
+
+}
+
+function programmatic_login($login_user, $login_pass) {
+    $username   = $login_user;
+    /* log in automatically */
+    if ( is_user_logged_in() ) {
+        wp_logout();
+    }
+    
+    add_filter( 'authenticate', 'allow_programmatic_login', 10, 3 );
+    $creds = array();
+    $creds['user_login'] = $username;
+    $creds['user_password'] = $login_pass;
+    $creds['remember'] = true;
+    $user = wp_signon( $creds, false );
+    remove_filter( 'authenticate', 'allow_programmatic_login', 10, 3 );
+    
+    if ( is_a( $user, 'WP_User' ) ) {
+        wp_set_current_user( $user->ID, $user->user_login );
+        wp_set_auth_cookie( $user->ID );
+        if ( is_user_logged_in() ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function allow_programmatic_login( $user, $username, $password ) {
+    return get_user_by( 'login', $username );
 }
 
 /* other scripts for ajax of postcodes */
