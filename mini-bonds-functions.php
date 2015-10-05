@@ -63,7 +63,7 @@ class MiniBondsHelper {
         $form3 = $this->mini_bonds_get_session('form3');
         $myxml='<Contacts>
             <row no="1">
-                <FL val="Contact Owner">Mini Bonds</FL>
+                <FL val="Contact Owner">BSEDGE</FL>
                 <FL val="Salutation">'.$form1['settitle'].'</FL>
                 <FL val="First Name">'.$form1['firstname'].'</FL>
                 <FL val="Last Name">'.$form1['surname'].'</FL>

@@ -131,14 +131,7 @@ function minibond_registration($atts) {
             $minibonds_helper->mini_bonds_save_session( 'step5', 'success' );
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
         }
-        minibond_registration_investment_process();
-    } else if( $step == '6' ) {
-        if( isset($_POST['step6']) ) {
-            $minibonds_helper->mini_bonds_save_session('form6', $_POST );
-            $minibonds_helper->mini_bonds_save_session( 'step6', 'success' );
-            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
-        }
-        minibond_registration_questionnaire();
+        minibond_registration_step5();
     } else {
         if( isset($_POST['step1']) ) {
             $minibonds_helper->mini_bonds_save_session('form1', $_POST );

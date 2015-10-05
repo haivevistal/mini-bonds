@@ -3,6 +3,7 @@
  * Various configuration required to work with the 
  * package examples.
  */
+ /* capsule details */
 $config                  = array();
 $config['partyId']       = '89240145';
 $config['appName']       = 'minibond';
@@ -11,4 +12,4 @@ $config['opportunityId'] = '3598071';
 $config['organizationName'] = 'mini bond';
 
 /* Zoho CRM access token */
-$config['zoho_token']   = '2ac757aff0c1fff377394fcb343ef5fc';
+$config['zoho_token']   = 'f5c2c439e4c1e2d7ded53aa2b8fc3a77';

@@ -23,3 +23,5 @@ h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !imp
 .investment-btn { margin-bottom: 5px !important;width: 100%; }
 .grayborder { border: 1px solid #ccc !important; border-radius: 6px !important; }
 .red { color: red; }
+.questionnaire-tabs  li a{color: #111 !important; background-color: #fff !important;border:1px solid #111 !important;border-bottom:0px solid #111 !important;}
+.questionnaire-tabs  li.active a { color: #fff !important;background-color: #111 !important;}
