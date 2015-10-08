@@ -8,9 +8,9 @@ function minibond_registration_step2() {
     <div class="row registration-container step2">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <div class="row col-xs-12 col-md-6 col-lg-6">
-                <h1 class="register-account-title">REGISTER YOUR ACCOUNT</h1>
+                <h1 class="register-account-title">INVESTMENT PROCESS</h1>
             </div>
-            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 nopadding">
                 <img src="<?php echo plugins_url( 'img/step2.png', __FILE__ ) ?>" alt="Registration Steps 2" class="register-steps pull-right" />
             </div>
         </div>
@@ -29,6 +29,9 @@ function minibond_registration_step2() {
 					<div class="controls form-inline postcodelookup">
 				    	<input type="text" class="form-control" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" />
 				    	<input type="button" id="sfindaddress" class="btn btn-default" onClick= "javascript:SPLGetAddressData(document.getElementById('postcode').value, 0)" value="Find Address" />
+                        <div class="col-xs-12 col-md-5 pull-right text-left">
+                            <span style="font-size:12px;">Please, find easiest your address<br /> with the Post Code finder</span>
+                        </div>
 				    </div>
 				    <div id="postcodeerror"><ul class="parsley-errors-list" /></ul></div>
 				</div>
@@ -309,46 +312,55 @@ function minibond_registration_step2() {
 			    	</select><ul class="parsley-errors-list" id="parsley-id-2038"></ul>
 				</div>
 				<div class="form-group">
-					<label for="addressyears">How Long Have You Lived Here: <span class="red">*</span></label>
-					<table border="0" class="multiselect">
-					<tbody><tr><td>
-					    <select id="addressyears" name="addressyears" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter how long you have lived at this address" data-parsley-errors-container="#timeerror">
-					    	<option value="">Years</option>
-					    	<option value="0 Years">0 Years</option>
-					    	<option value="1 Years">1 Year</option>
-					    	<option value="2 Years">2 Years</option>
-					    	<option value="3 Years">3 Years</option>
-					    	<option value="4 Years">4 Years</option>
-					    	<option value="5 Years">5 Years</option>
-					    	<option value="6 Years">6 Years</option>
-					    	<option value="7 Years">7 Years</option>
-					    	<option value="8 Years">8 Years</option>
-					    	<option value="9 Years">9 Years</option>
-					    	<option value="10 Years">10+ Years</option>
-					    </select>
-					</td><td>
-					    <select id="addressmonths" name="addressmonths" class="form-control">
-					    	<option value="0 Months">0 Months</option>
-					    	<option value="1 Months">1 Month</option>
-					    	<option value="2 Months">2 Months</option>
-					    	<option value="3 Months">3 Months</option>
-					    	<option value="4 Months">4 Months</option>
-					    	<option value="5 Months">5 Months</option>
-					    	<option value="6 Months">6 Months</option>
-					    	<option value="7 Months">7 Months</option>
-					    	<option value="8 Months">8 Months</option>
-					    	<option value="9 Months">9 Months</option>
-					    	<option value="10 Months">11 Months</option>
-					    </select>
-					</td></tr>
-					<tr><td colspan="2">
-					</td></tr></tbody></table>
-                    <div id="timeerror"></div>
-				</div>
+					<label for="addressyears" class="col-xs-12 col-md-12 nopadding">How Long Have You Lived Here: <span class="red">*</span></label>
+                    <div class="col-xs-12 col-md-8 nopadding">
+                        <div class="col-xs-12 col-md-6 nopadding">
+                            <select id="addressyears" name="addressyears" class="form-control" data-parsley-required="true" data-parsley-error-message="Please enter how long you have lived at this address" data-parsley-errors-container="#timeerror">
+                                <option value="">Years</option>
+                                <option value="0 Years">0 Years</option>
+                                <option value="1 Years">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                                <option value="3 Years">3 Years</option>
+                                <option value="4 Years">4 Years</option>
+                                <option value="5 Years">5 Years</option>
+                                <option value="6 Years">6 Years</option>
+                                <option value="7 Years">7 Years</option>
+                                <option value="8 Years">8 Years</option>
+                                <option value="9 Years">9 Years</option>
+                                <option value="10 Years">10+ Years</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-6 nopadding">
+                            <select id="addressmonths" name="addressmonths" class="form-control">
+                                <option value="0 Months">0 Months</option>
+                                <option value="1 Months">1 Month</option>
+                                <option value="2 Months">2 Months</option>
+                                <option value="3 Months">3 Months</option>
+                                <option value="4 Months">4 Months</option>
+                                <option value="5 Months">5 Months</option>
+                                <option value="6 Months">6 Months</option>
+                                <option value="7 Months">7 Months</option>
+                                <option value="8 Months">8 Months</option>
+                                <option value="9 Months">9 Months</option>
+                                <option value="10 Months">11 Months</option>
+                            </select>
+                        </div>
+                        <div id="timeerror"></div>
+                    </div>
+                </div>
 			</div>
 		</div>
-		<input type="submit" class="continue" value="" />
+		<input type="submit" class="btn btn-success continue" value="CONFIRM" />
 		</form>
+        </div>
+        <div class="col-xs-12 col-md-12 bottom-tel">
+            <div class="col-xs-1 col-md-1">
+                <img src="<?php echo plugins_url( 'img/icon_call_us.png', __FILE__ ) ?>" alt="Telephone Number" class="pull-left" />
+            </div>
+            <div class="col-xs-11 col-md-11">
+                <h2>If you have any problem please feel free to call us <a href="tel:03456076001">0345 607 6001</a></h2>
+                <span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span>
+            </div>
         </div>
     </div>
     <?php

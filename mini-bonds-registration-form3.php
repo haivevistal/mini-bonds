@@ -5,9 +5,9 @@ function minibond_registration_step3() {
     <div class="row registration-container step3">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <div class="row col-xs-12 col-md-6 col-lg-6">
-                <h1 class="register-account-title">REGISTER YOUR ACCOUNT</h1>
+                <h1 class="register-account-title">INVESTMENT PROCESS</h1>
             </div>
-            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 nopadding">
                 <img src="<?php echo plugins_url( 'img/step3.png', __FILE__ ) ?>" alt="Registration Steps 3" class="register-steps pull-right" />
             </div>
         </div>
@@ -45,23 +45,20 @@ function minibond_registration_step3() {
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6 agreeterms">
-                        <h2 class="smaller form-title" style="padding:12px 0px;">CUSTOMER AGREEMENT</h2>
-                        <table border="0" class="agreeterms">
-                            <tbody>
-                            <tr>
-                                <td><input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" /></td><td>I confirm that I agree to the <a href="#" target="_blank">Lender Agreement</a> <span class="red">*</span>.
-                                </td>
-                            </tr>
-                            <tr><td colspan="2"><div id="agreelendererror"></div></td></tr>
-                            <tr>
-                                <td><input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" /></td>
-                                <td>I confirm that I have read the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Website Terms of Use</a> and <a href="#" target="_blank">Cookie Policy</a>. <span class="red">*</span></td>
-                            </tr>
-                            <tr><td colspan="2"><div id="agreeothererror"></div></td></tr>
-                        </tbody></table>
+                        <label class="smaller" style="padding:12px 0px;">CUSTOMER AGREEMENT</label><br />
+                        <div class="col-xs-12 col-md-12" style="padding:20px 0;">
+                            <div class="col-xs-12 col-md-12 nopadding" style="height: 25px;">
+                                <input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" /> I confirm that I agree to the <a href="#" target="_blank">Lender Agreement</a> <span class="red">*</span>.
+                                <div id="agreelendererror"></div>
+                            </div>
+                            <div class="col-xs-12 col-md-12 nopadding">
+                                <input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" /> I confirm that I have read the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Website Terms of Use</a> and <a href="#" target="_blank">Cookie Policy</a>. <span class="red">*</span>
+                                <div id="agreeothererror"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-xs-12 col-md-6 financiainformation">
-                        <h2 class="smaller form-title" style="padding:12px 0px;">FINANCIAL INFORMATION</h2>
+                        <label class="smaller" style="padding:12px 0px;">FINANCIAL INFORMATION</label><br />
                         <span>We are required to understand your financial situation for the purposes of financial crime prevention.</span>
                         <div class="col-xs-12 col-md-12" style="padding:20px 0;">
                             <div class="col-xs-12 col-md-6" style="padding:0;">
@@ -105,19 +102,19 @@ function minibond_registration_step3() {
                                 <div id="fundsourceerror"></div>
                             </div>
                         </div>
-                        <table border="0" class="agreeterms">
-                            <tbody>
-                            <tr style="display: none;" class="otherfundsourcerows"><td>&nbsp;</td></tr>
-                            <tr style="display: none;" class="otherfundsourcerows">
-                            <td>Other Fund Source</td>
-                            <td><input type="text" name="otherfundsource" id="otherfundsource" class="form-control" style="width: 350px;" data-parsley-otherfundsourceconditional="" data-parsley-validate-if-empty="" data-parsley-otherfundsourceconditional-message="Please enter a valid other fund source" data-parsley-errors-container="#otherfundsourceerror" data-parsley-id="0848"></td>
-                            </tr>
-                            <tr><td></td></tr>
-                        </tbody></table>
                     </div>
                 </div>
-                <input type="submit" class="continue" value="" />
+                <input type="submit" class="btn btn-success continue" value="CONFIRM" />
                 </form>
+        </div>
+        <div class="col-xs-12 col-md-12 bottom-tel">
+            <div class="col-xs-1 col-md-1">
+                <img src="<?php echo plugins_url( 'img/icon_call_us.png', __FILE__ ) ?>" alt="Telephone Number" class="pull-left" />
+            </div>
+            <div class="col-xs-11 col-md-11">
+                <h2>If you have any problem please feel free to call us <a href="tel:03456076001">0345 607 6001</a></h2>
+                <span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span>
+            </div>
         </div>
     </div>
     <?php

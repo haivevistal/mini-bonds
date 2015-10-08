@@ -19,16 +19,16 @@ function minibond_registration($atts) {
     if( $step == '1' ) {
         if( isset($_POST['step1']) ) {
             
-            $res = $minibonds_helper->mini_bonds_check_if_exist_zoho_crm($_POST['email']);
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else if( $res->result->Contacts->row->FL ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">Record with the same email already exists.</div>';
-            } else {
+            //$res = $minibonds_helper->mini_bonds_check_if_exist_zoho_crm($_POST['email']);
+            //if( $res->error->code ) {
+            //    echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
+           // } else if( $res->result->Contacts->row->FL ) {
+            //    echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">Record with the same email already exists.</div>';
+           // } else {
                 $minibonds_helper->mini_bonds_save_session('form1', $_POST );
                 $minibonds_helper->mini_bonds_save_session( 'step1', 'success' );
                 $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'2/' );
-            }
+           // }
         }
         minibond_registration_step1();
         
