@@ -27,10 +27,10 @@ function minibond_admin_setting() {
                 <div class="col-xs-12 col-md-11">
                     <div class="form-group">
                         <label for="owner">Zoho User/Owner: <span class="red">*</span></label>
-                        <input type="text" class="form-control" id="owner" name="owner" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['owner']; ?>" />
+                        <input type="text" class="form-control" id="owner" name="owner" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['owner']; ?>" required />
                     </div>
                     <div class="form-group">
-                        <label for="group">Zoho Group: <span class="red">*</span></label>
+                        <label for="group">Zoho Group: </label>
                         <input type="text" class="form-control" id="group" name="group" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['group']; ?>" />
                     </div>
                 </div>
