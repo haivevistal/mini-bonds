@@ -4,10 +4,10 @@ body{padding-top:50px;font-family: "Roboto", sans-serif !important;font-size: 14
 .registration-container { border: 1px solid #e1e1e1;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;padding: 15px;}
 h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !important;}
 .form-title { font-size: 24px !important;}
-#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue{background: url(../../img/btn_next.png);width: 108px;height: 50px;border: none;background-repeat: no-repeat;float: right;outline:0;}
+#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue, .step4-a-form  input.continue, .step4-b-form  input.continue, .step4-c-form  input.continue, .step4-d-form  input.continue{background: url(../../img/btn_next.png);width: 108px;height: 50px;border: none;background-repeat: no-repeat;float: right;outline:0;}
 #minibonds-registrationForm  table, #minibonds-registrationForm  td, .step2-form table, .step2-form td, .step3-form table, .step3-form td { border: 0 !important;}
 #minibonds-registrationForm  td, .step2-form td, .step3-form td { padding: 7px 20px 7px 0 !important;background-color: #fff;}
-.step2-form, .step3-form, .step4-form { margin-top: 35px;}
+.step2-form, .step3-form, .step4-form , .step4-a-form, .step4-b-form, .step4-c-form, .step4-d-form{ margin-top: 35px;}
 .parsley-errors-list, .parsley-errors-list li { list-style-type: none !important;padding-left: 0px !important;color: #bc1437;margin-left: 0 !important;}
 .parsley-error {background-color: #f5e3e7;}
 #birthdayerror ul { height: 5px !important;}

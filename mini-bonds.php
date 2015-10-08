@@ -17,10 +17,7 @@ function mini_bonds_setting() {
     add_menu_page(__('Mini Bonds Setting','Mini Bonds Setting'), __('Mini Bonds Setting','Mini Bonds Setting'), 'manage_options', 'minibonds', 'mini_bonds' );
 }
 
-function mini_bonds() {
-    echo 'starts here';
-}
-
+add_action( 'wp_enqueue_scripts', 'mini_bonds_scripts' );
 function mini_bonds_scripts() {
     /* add js libararies */
     wp_enqueue_script( 'bootstrap_js', plugins_url( 'assets/bootstrap/js/bootstrap.min.js', __FILE__ ) , array(), '3.3.5', true );
@@ -41,8 +38,6 @@ function mini_bonds_scripts() {
     wp_enqueue_style( 'minibond_css' );
 }
 
-add_action( 'wp_enqueue_scripts', 'mini_bonds_scripts' );
-
 add_action('init', 'mini_bonds_start_session', 1);
 function mini_bonds_start_session() {
     if(!session_id() || session_id() == '' ) {
@@ -60,3 +55,8 @@ include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-investment-process-form
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-questionnaire-form.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-shortcodes.php');
+
+function mini_bonds() {
+    include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-admin-setting.php');
+    minibond_admin_setting();
+}

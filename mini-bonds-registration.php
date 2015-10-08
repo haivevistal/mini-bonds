@@ -50,13 +50,56 @@ function minibond_registration($atts) {
         if( isset($_POST['step3']) ) {
             $minibonds_helper->mini_bonds_save_session('form3', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step3', 'success' );
-            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm();
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success">'.$res->error->message.'</div>';
-                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
+            
+            $f1 = $minibonds_helper->mini_bonds_get_session('form1');
+            $f3 = $minibonds_helper->mini_bonds_get_session('form3');
+            $zemail = trim($f1['email']);
+            $zpass = trim($f3['password']);
+            
+            if ( is_user_logged_in() ) {
+                wp_logout();
             }
+            
+            $exist_id = username_exists( $zemail );
+            if( !$exist_id and email_exists( $zemail ) == false ) {
+                /* create new user and login it in wordpress */
+                $user_id = wp_create_user( $zemail, $zpass, $zemail );
+                $user = get_user_by( 'id', $user_id ); 
+                if( $user ) {
+                    /*$curr_user=  new WP_User( $user_id , $user->user_login );*/
+                    wp_set_current_user( $user_id, $user->user_login );
+                    wp_set_auth_cookie( $user_id, true );
+                    do_action( 'wp_login', $user->user_login );
+                    $creds = array();
+                    $creds['user_login'] = $user->user_login;
+                    $creds['user_password'] = $zpass;
+                    $creds['remember'] = true;
+                    $user = wp_signon( $creds, false );
+                }
+            } else {
+                /* login the user in wordpress */
+                $user = get_user_by( 'login', $zemail );
+                $user_id = $user->ID;
+                $user = get_user_by( 'id', $user_id );
+                if( $user ) {
+                    /*$curr_user=  new WP_User( $user_id , $user->user_login ); */
+                    wp_set_current_user( $user_id, $user->user_login );
+                    wp_set_auth_cookie( $user_id, true );
+                    do_action( 'wp_login', $user->user_login );
+                    $creds = array();
+                    $creds['user_login'] = $user->user_login;
+                    $creds['user_password'] = $zpass;
+                    $creds['remember'] = true;
+                    $user = wp_signon( $creds, false );
+                }
+                if ( is_user_logged_in() ) {
+                    return true;
+                }
+            }
+            
+            echo '<div class="col-xs-12 col-md-12 alert alert-success">'.$res->error->message.'</div>';
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
+            
         }
         
         if( $minibonds_helper->mini_bonds_get_session('step2') !='success' ) {
@@ -65,59 +108,63 @@ function minibond_registration($atts) {
         minibond_registration_step3();
         
     } else if( $step == '4' ) {
-        if( isset($_POST['step4']) ) {
-            $minibonds_helper->mini_bonds_save_session('form4', $_POST);
-            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
-            $res = $minibonds_helper->loginUser($_POST['email'], $_POST['password']);
-            if( $res == NULL ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">Error: Email or Password is incorrect.</div>';
+        if( isset($_POST['step4_a']) ) {
+            $minibonds_helper->mini_bonds_save_session('form4_a', $_POST);
+            $minibonds_helper->mini_bonds_save_session( 'step4_a', 'success' );
+            
+            $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_a' );
+            $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['accept_investment'].', How easily can you sell your bonds: '.$form4['how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$form4['return_providence_bond'].', Is your capital secure: '.$form4['capital_secure'].', Medium or Long-term Investment: '.$form4['short_or_long_term'];
+            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
+            if( $res->error->code ) {
+                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
             } else {
-                $details = $res->Contacts->row->FL;
-                $zemail = trim($details[3]->content);
-                $zpass = trim($details[4]->content);
-                
-                if ( is_user_logged_in() ) {
-                    wp_logout();
-                }
-                
-                $exist_id = username_exists( $zemail );
-                if( !$exist_id and email_exists( $zemail ) == false ) {
-                    /* create new user and login it in wordpress */
-                    $user_id = wp_create_user( $zemail, $zpass, $zemail );
-                    $user = get_user_by( 'id', $user_id ); 
-                    if( $user ) {
-                        /*$curr_user=  new WP_User( $user_id , $user->user_login );*/
-                        wp_set_current_user( $user_id, $user->user_login );
-                        wp_set_auth_cookie( $user_id, true );
-                        do_action( 'wp_login', $user->user_login );
-                        $creds = array();
-                        $creds['user_login'] = $user->user_login;
-                        $creds['user_password'] = $zpass;
-                        $creds['remember'] = true;
-                        $user = wp_signon( $creds, false );
-                        echo 'created and logged';
-                    }
-                } else {
-                    /* login the user in wordpress */
-                    $user = get_user_by( 'login', $zemail );
-                    $user_id = $user->ID;
-                    $user = get_user_by( 'id', $user_id );
-                    if( $user ) {
-                        /*$curr_user=  new WP_User( $user_id , $user->user_login ); */
-                        wp_set_current_user( $user_id, $user->user_login );
-                        wp_set_auth_cookie( $user_id, true );
-                        do_action( 'wp_login', $user->user_login );
-                        $creds = array();
-                        $creds['user_login'] = $user->user_login;
-                        $creds['user_password'] = $zpass;
-                        $creds['remember'] = true;
-                        $user = wp_signon( $creds, false );
-                    }
-                    if ( is_user_logged_in() ) {
-                        echo 'user logged';
-                        var_dump($user);
-                    }
-                }
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
+            }
+        }
+        
+        if( isset($_POST['step4_b']) ) {
+            $minibonds_helper->mini_bonds_save_session('form4_b', $_POST);
+            $minibonds_helper->mini_bonds_save_session( 'step4_b', 'success' );
+            
+            $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_b' );
+            $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['advised_investor'];
+            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
+            if( $res->error->code ) {
+                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
+            } else {
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
+            }
+        }
+        
+        if( isset($_POST['step4_c']) ) {
+            $minibonds_helper->mini_bonds_save_session('form4_c', $_POST);
+            $minibonds_helper->mini_bonds_save_session( 'step4_c', 'success' );
+            
+            $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_c' );
+            $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['self_certified_investor'];
+            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
+            if( $res->error->code ) {
+                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
+            } else {
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
+            }
+        }
+        
+        if( isset($_POST['step4_d']) ) {
+            $minibonds_helper->mini_bonds_save_session('form4_d', $_POST);
+            $minibonds_helper->mini_bonds_save_session( 'step4_d', 'success' );
+            
+            $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_c' );
+            $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['accept_high_net_investor_promotions'].', How easily can you sell your bonds: '.$form4['high_net_investor_how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$form4['high_net_investor_return_providence_bond'].', Is your capital secure: '.$form4['high_net_investor_capital_secure'].', Medium or Long-term Investment: '.$form4['high_net_investor_short_or_long_term'];
+            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
+            if( $res->error->code ) {
+                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
+            } else {
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
             }
         }
         

@@ -53,17 +53,21 @@ class MiniBondsHelper {
     }
     
     /* save details to Zoho CRM */
-    function mini_bonds_add_people_to_zoho_crm() {
+    function mini_bonds_add_people_to_zoho_crm($investment) {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
         $token = $config['zoho_token'];
         
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $owner = $zoho['owner'] == '' ? 'BSEDGE' : $zoho['owner'];
+        $group = $zoho['group'] == '' ? '' : $zoho['group'];
         /* get session post variables */
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
         $form3 = $this->mini_bonds_get_session('form3');
+        $investment = $investment;
         $myxml='<Contacts>
             <row no="1">
-                <FL val="Contact Owner">BSEDGE</FL>
+                <FL val="Contact Owner">'.$owner.'</FL>
                 <FL val="Salutation">'.$form1['settitle'].'</FL>
                 <FL val="First Name">'.$form1['firstname'].'</FL>
                 <FL val="Last Name">'.$form1['surname'].'</FL>
@@ -86,6 +90,7 @@ class MiniBondsHelper {
                 <FL val="Net Worth">'.$form3['networth'].'</FL>
                 <FL val="Fund Source">'.$form3['fundsource'].'</FL>
                 <FL val="Other Fund Source">'.$form3['otherfundsource'].'</FL>
+                <FL val="Description">'.$investment.'</FL>
             </row>
             </Contacts>';
         
