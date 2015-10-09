@@ -4,31 +4,31 @@ function minibond_registration_step4() {
     ?>
     <div class="row registration-container step4">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <div class="row col-xs-12 col-md-6 col-lg-6">
+            <div class="row col-xs-12 col-md-6 col-lg-6 nopadding">
                 <h1 class="register-account-title">INVESTMENT PROCESS</h1>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 nopadding">
                 <img src="<?php echo plugins_url( 'img/step4.png', __FILE__ ) ?>" alt="Registration Steps 4" class="register-steps pull-right" />
             </div>
-            <div class="row col-xs-12 col-md-12 col-lg-12">
+            <div class="row col-xs-12 col-md-12 col-lg-12 nopadding">
                 <span>It is a regulatory requirements that before you gain access to certain investment products or information you must select a relevant investor type. This is so we can assess if the investment product is appropriate for you.</span>
             </div>
         </div>
-        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 nopadding">
             <h2 class="smaller form-title" style="padding:12px 0px;">What Type Of Investor Are You?</h2>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
             <div class="row">
                 <div class="col-xs-12 col-md-12 nopadding">
-                    <ul class="nav nav-tabs nav-justified questionnaire-tabs">
-                        <li class="active"><a data-toggle="tab" href="#retail-investor" class="btn btn-primary"><img src="<?php echo plugins_url( 'img/icon_retail_investor_normal.png', __FILE__ ) ?>" alt="Retail (restricted) Investor" style="display:none;" /><img src="<?php echo plugins_url( 'img/icon_retail_investor_pressed.png', __FILE__ ) ?>" alt="Retail (restricted) Investor" class="active" /> Retail (restricted) Investor</a>
+                    <ul class="nav nav-tabs nav questionnaire-tabs">
+                        <li class="active"><a data-toggle="tab" href="#retail-investor" class="btn btn-primary"><img src="<?php echo plugins_url( 'img/icon_retail_investor_normal.png', __FILE__ ) ?>" alt="Retail (restricted) Investor" style="display:none;" /><img src="<?php echo plugins_url( 'img/icon_retail_investor_pressed.png', __FILE__ ) ?>" alt="Retail (restricted) Investor" class="active" /> Retail Investor</a>
                         </li>
                         <li><a data-toggle="tab" href="#advised-investor" class="btn btn-primary"><img src="<?php echo plugins_url( 'img/icon_advised_investor_normal.png', __FILE__ ) ?>" alt="Advised Investor" /><img src="<?php echo plugins_url( 'img/icon_advised_investor_pressed.png', __FILE__ ) ?>" class="active" style="display:none;" alt="Advised Investor" /> Advised Investor</a></li>
                         <li><a data-toggle="tab" href="#self-certified-investor" class="btn btn-primary"><img src="<?php echo plugins_url( 'img/icon_self_certified_investor_normal.png', __FILE__ ) ?>" alt="Self-certified Investor" /><img class="active" style="display:none;" src="<?php echo plugins_url( 'img/icon_self_certified_investor_pressed.png', __FILE__ ) ?>" alt="Self-certified Investor" /> Self-certified Investor</a></li>
-                        <li><a data-toggle="tab" href="#high-net-investor" class="btn btn-primary"><img src="<?php echo plugins_url( 'img/icon_high_net_worth_investor_normal.png', __FILE__ ) ?>" alt="High Net-Worth Investor" /><img class="active" style="display:none;" src="<?php echo plugins_url( 'img/icon_high_net_worth_investor_pressed.png', __FILE__ ) ?>" alt="High Net-Worth Investor" /> High Net-Worth Investor</a></li>
+                        <li><a data-toggle="tab" href="#high-net-investor" class="btn btn-primary" style="margin-right:0px !important;"><img src="<?php echo plugins_url( 'img/icon_high_net_worth_investor_normal.png', __FILE__ ) ?>" alt="High Net-Worth Investor" /><img class="active" style="display:none;" src="<?php echo plugins_url( 'img/icon_high_net_worth_investor_pressed.png', __FILE__ ) ?>" alt="High Net-Worth Investor" /> High Net-Worth Investor</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-12 col-md-12">
+                <div class="col-xs-12 col-md-12 tabs_content">
                     <div class="tab-content">
                         <div id="retail-investor" class="tab-pane fade in active">
                         <form method="post" data-parsley-validate="" role="form" novalidate="" class="step4-form step4-a-form">
@@ -58,27 +58,21 @@ function minibond_registration_step4() {
                             </p>
                             <h3>QUESTIONNAIRE</h3>
                             <p>These questions are designed to check that this type of investment is appropriate for you. Please read each question carefully and select the answer that you beleive is correct:</p>
+                            <strong>1. After you invest in this offer how easily can you sell your bonds?</strong>
+                            <p><input type="checkbox" name="how_easily_sell_bonds" value="under exceptional circumtances" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error" /> The bonds are not freely transferable so I can only sell them under exceptional circumtances</p>
                             
-                            <p>&nbsp;</p>
-                            <p><strong>1. After you invest in this offer how easily can you sell your bonds?</strong></p>
-                            <p><input type="checkbox" name="how_easily_sell_bonds" value="under exceptional circumtances" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error" /> The bonds are not freely transferable so I can only sell them under exceptional circumtances</p>
                             <p><input type="checkbox" name="how_easily_sell_bonds2" value="easily" /> Very easily: I can sell them like I do other stocks and bonds</p>
-                            
-                            <p>&nbsp;</p>
-                            <p><strong>2. The expected return from Providence Bonds?</strong></p>
-                            <p><input type="checkbox" name="return_providence_bond" value="7.5% per annum" data-parsley-required="true" data-parsley-error-message="Missing required field" data-parsley-errors-container="#questionnaire_error"  /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
+                            <strong>2. The expected return from Providence Bonds?</strong>
+                            <p><input type="checkbox" name="return_providence_bond" value="7.5% per annum" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error"  /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
                             <p><input type="checkbox" name="return_providence_bond2" value="dependent on movements in the financial bond and equity markets" /> Is dependent on movements in the financial bond and equity markets</p>
                             
-                            <p>&nbsp;</p>
-                            <p><strong>3. Is your capital secure?</strong></p>
-                            <p><input type="checkbox" name="capital_secure" value="at risk" data-parsley-required="true" data-parsley-error-message="Missing required field" data-parsley-errors-container="#questionnaire_error"  /> No: My capital is at risk and I Might not get back all that invested</p>
+                            <strong>3. Is your capital secure?</strong>
+                            <p><input type="checkbox" name="capital_secure" value="at risk" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error"  /> No: My capital is at risk and I Might not get back all that invested</p>
                             <p><input type="checkbox" name="capital_secure2" value="guranteed" /> Yes: It is guranteed by the Financial Services Compensation Scheme</p>
                             
-                            <p>&nbsp;</p>
-                            <p><strong>4. Is investment in Providence Bonds intended to be a short, medium or long-term investment?</strong></p>
-                            <p><input type="checkbox" name="short_or_long_term" value="long term" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error"  /> It is intended to be held for a fixed number of years</p>
+                            <strong>4. Is investment in Providence Bonds intended to be a short, medium or long-term investment?</strong>
+                            <p><input type="checkbox" name="short_or_long_term" value="long term" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error"  /> It is intended to be held for a fixed number of years</p>
                             <p><input type="checkbox" name="short_or_long_term2" value="short term" /> It is a short-term investment aimed at providing an immediate return</p>
-                            
                             <div class="col-xs-12 col-md-12 step4_footer pull-right">
                                 <div class="col-xs-12 col-md-12 nopadding">
                                     <div class="col-xs-12 col-md-6 nopadding">
@@ -99,7 +93,6 @@ function minibond_registration_step4() {
                             <strong>What is an Advised Investor?</strong>
                             <p>An 'Advised Investor' is someone who has a financial advisor that is authorized adn regulated by the Financial Conduct Authority; for example, and Independent Finacial Advisor (IFA), from whom the investor will receive advice abouth each investment they make through IPM.</p>
                             
-                            <p>&nbsp;</p>
                             <p><input type="checkbox" name="advised_investor" value="Accepted" data-parsley-required="true" data-parsley-error-message="This is a required field." /> I am a client of a regulated firm that advises on unlisted shares and unlisted debt securities, which has assessed me as suitable to receive financial promotions and from whom I will seek advice on any investmentI make through IPM. I accept that the investmnet to which the IPM promotions relate my expose me to a significant risk of losing all of the money or other property invested.</p>
                             
                             <div class="col-xs-12 col-md-12 step4_footer pull-right">
@@ -127,7 +120,7 @@ function minibond_registration_step4() {
                                 <li>I can receive promotional communications made by a person who is authorized by the Financial Conduct Authority which relate to investment activity in non-mainstream pooled investments;</li>
                                 <li>The investments to which the promotions will relate my expose me to a significant risk of losing all of the property invested.</li>
                             </ol>
-                            <p>&nbsp;</p>
+
                             <p>I am a Self-certified Investor because at least one of the following applies: </p>
                             <ol type="a">
                                 <li>I am a member of a network or syndicate of business angels and have been so for at least the last six months prior to 12th September 2014;</li>
@@ -156,15 +149,12 @@ function minibond_registration_step4() {
                             <strong>What is a Sophisticated High Net Worth Investor?</strong>
                             <p>If you have earn more than &pound;100,000 a year consistency for the past 12 months of have net assets of more than &pound;250,000, this category may applicable to you.</p>
                             
-                            <p>&nbsp;</p>
                             <strong>Sophisticated High Net Worth Investor</strong>
                             <p>I make this statement so that I can receive promotional communications which are exempt from the restriction on promotion of non-mainstream pooled investments.</p>
-                            <p>&nbsp;</p>
+
                             <p>The exemption relates to certified high net worth investors and I declare that I qualify as such because at least one of the following applies to me:</p>
-                            <p>&nbsp;</p>
                             <p>I have, throughout the previous financial year, an annual income to the value of &pound;100,000;</p>
                             <p>I have held, throughout the previous financial year, net assets to the value of &pound;100,000 or more.</p>
-                            <p>&nbsp;</p>
                             
                             <strong>Net assets for these purposes do not include:</strong>
                             <ol type="a">
@@ -173,29 +163,24 @@ function minibond_registration_step4() {
                                 <li>any benefits (in the form of pensions or otherwise) which are payable on the termination of my service or on my death or retirement and to which I am (or my dependents are), or may be, entitled.</li>
                             </ol>
                             <p><input type="checkbox" name="accept_high_net_investor_promotions" data-parsley-required="true" data-parsley-error-message="This is a required field." /> I accept that the investments to which the promotions will relate may expose me to a significant risk of losing all of the money or other property invested. I am aware that it is open to me to seek advice from an authorized person who specialises in advising on non-mainstream pooled investments.</p>
-                            
-                            <p>&nbsp;</p>
+
                             <h3>QUESTIONNAIRE</h3>
                             <p>These questions are designed to check that this type of investment is appropriate for you. Please read each question carefully and select the answer that you believe is correct:</p>
-                            
-                            <p>&nbsp;</p>
-                            <p><strong>1. After you invest in this offer how easily can you sell your bonds?</strong></p>
-                            <p><input type="checkbox" name="high_net_investor_how_easily_sell_bonds" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error_" /> The bonds are not freely transferable so I can only sell them under exceptional circumtances</p>
+
+                            <strong>1. After you invest in this offer how easily can you sell your bonds?</strong>
+                            <p><input type="checkbox" name="high_net_investor_how_easily_sell_bonds" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error_" /> The bonds are not freely transferable so I can only sell them under exceptional circumtances</p>
                             <p><input type="checkbox" name="high_net_investor_how_easily_sell_bonds2" /> Very easily: I can sell them like I do other stocks and bonds</p>
-                            
-                            <p>&nbsp;</p>
-                            <p><strong>2. The expected return from Providence Bonds?</strong></p>
-                            <p><input type="checkbox" name="high_net_investor_return_providence_bond" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error_" /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
+
+                            <strong>2. The expected return from Providence Bonds?</strong>
+                            <p><input type="checkbox" name="high_net_investor_return_providence_bond" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error_" /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
                             <p><input type="checkbox" name="high_net_investor_return_providence_bond2" /> Is dependent on movements in the financial bond and equity markets</p>
-                            
-                            <p>&nbsp;</p>
-                            <p><strong>3. Is your capital secure?</strong></p>
-                            <p><input type="checkbox" name="high_net_investor_capital_secure" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error_" /> No: My capital is at risk and I Might not get back all that invested</p>
+
+                            <strong>3. Is your capital secure?</strong>
+                            <p><input type="checkbox" name="high_net_investor_capital_secure" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error_" /> No: My capital is at risk and I Might not get back all that invested</p>
                             <p><input type="checkbox" name="high_net_investor_capital_secure2" /> Yes: It is guranteed by the Financial Services Compensation Scheme</p>
-                            
-                            <p>&nbsp;</p>
-                            <p><strong>4. Is investment in Providence Bonds intended to be a short, medium or long-term investment?</strong></p>
-                            <p><input type="checkbox" name="high_net_investor_short_or_long_term" data-parsley-required="true" data-parsley-error-message="Missing required field." data-parsley-errors-container="#questionnaire_error_" /> It is intended to be held for a fixed number of years</p>
+
+                            <strong>4. Is investment in Providence Bonds intended to be a short, medium or long-term investment?</strong>
+                            <p><input type="checkbox" name="high_net_investor_short_or_long_term" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error_" /> It is intended to be held for a fixed number of years</p>
                             <p><input type="checkbox" name="high_net_investor_short_or_long_term2" /> It is a short-term investment aimed at providing an immediate return</p>
                             
                             <div class="col-xs-12 col-md-12 step4_footer pull-right">
@@ -219,7 +204,7 @@ function minibond_registration_step4() {
                 <img src="<?php echo plugins_url( 'img/icon_call_us.png', __FILE__ ) ?>" alt="Telephone Number" class="pull-left" />
             </div>
             <div class="col-xs-11 col-md-11">
-                <h2>If you have any problem please feel free to call us <a href="tel:03456076001">0345 607 6001</a></h2>
+                <h2>If you have any problem please feel free to call us <a href="tel:03456076001" style="color: #0f3269 !important;">0345 607 6001</a></h2>
                 <span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span>
             </div>
         </div>

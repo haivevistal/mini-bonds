@@ -23,37 +23,37 @@
         }, 32);
         $('.step4-a-form').submit( function() {
             if( $('input[name="how_easily_sell_bonds2"]').prop("checked") ) {
-                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="return_providence_bond2"]').prop("checked") ) {
-                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="capital_secure2"]').prop("checked") ) {
-                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="short_or_long_term2"]').prop("checked") ) {
-                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
         });
         $('.step4-d-form').submit( function() {
             if( $('input[name="high_net_investor_how_easily_sell_bonds2"]').prop("checked") ) {
-                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="high_net_investor_return_providence_bond2"]').prop("checked") ) {
-                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="high_net_investor_capital_secure2"]').prop("checked") ) {
-                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
             if( $('input[name="high_net_investor_short_or_long_term2"]').prop("checked") ) {
-                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Missing required field.</li></ul>');
+                $('#questionnaire_error_').html('<ul class="parsley-errors-list filled" id="parsley-id-multiple-how_easily_sell_bonds"><li class="parsley-custom-error-message">Your answers are incorrect</li></ul>');
                 return false;
             }
         });

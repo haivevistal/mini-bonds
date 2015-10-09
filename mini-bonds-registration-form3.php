@@ -48,11 +48,11 @@ function minibond_registration_step3() {
                         <label class="smaller" style="padding:12px 0px;">CUSTOMER AGREEMENT</label><br />
                         <div class="col-xs-12 col-md-12" style="padding:20px 0;">
                             <div class="col-xs-12 col-md-12 nopadding" style="height: 25px;">
-                                <input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" /> I confirm that I agree to the <a href="#" target="_blank">Lender Agreement</a> <span class="red">*</span>.
+                                <input type="checkbox" id="agreelender" data-parsley-required="true" data-parsley-error-message="Please agree to the terms of the Lender Agreement" data-parsley-errors-container="#agreelendererror" data-parsley-multiple="agreelender" /> I confirm that I agree to the <a style="color: #0f3269 !important;" href="#" target="_blank">Lender Agreement</a> <span class="red">*</span>.
                                 <div id="agreelendererror"></div>
                             </div>
                             <div class="col-xs-12 col-md-12 nopadding">
-                                <input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" /> I confirm that I have read the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Website Terms of Use</a> and <a href="#" target="_blank">Cookie Policy</a>. <span class="red">*</span>
+                                <input type="checkbox" id="agreeother" data-parsley-required="true" data-parsley-error-message="Please agree to the Privacy Policy, Website Terms of Use" data-parsley-errors-container="#agreeothererror" data-parsley-multiple="agreeother" /> I confirm that I have read the <a style="color: #0f3269 !important;" href="#" target="_blank">Privacy Policy</a>, <a style="color: #0f3269 !important;" href="#" target="_blank">Website Terms of Use</a> and <a style="color: #0f3269 !important;" href="#" target="_blank">Cookie Policy</a>. <span class="red">*</span>
                                 <div id="agreeothererror"></div>
                             </div>
                         </div>
@@ -112,7 +112,7 @@ function minibond_registration_step3() {
                 <img src="<?php echo plugins_url( 'img/icon_call_us.png', __FILE__ ) ?>" alt="Telephone Number" class="pull-left" />
             </div>
             <div class="col-xs-11 col-md-11">
-                <h2>If you have any problem please feel free to call us <a href="tel:03456076001">0345 607 6001</a></h2>
+                <h2>If you have any problem please feel free to call us <a href="tel:03456076001" style="color: #0f3269 !important;">0345 607 6001</a></h2>
                 <span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span>
             </div>
         </div>

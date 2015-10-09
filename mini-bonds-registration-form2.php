@@ -30,7 +30,7 @@ function minibond_registration_step2() {
 				    	<input type="text" class="form-control" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" />
 				    	<input type="button" id="sfindaddress" class="btn btn-default" onClick= "javascript:SPLGetAddressData(document.getElementById('postcode').value, 0)" value="Find Address" />
                         <div class="col-xs-12 col-md-5 pull-right text-left">
-                            <span style="font-size:12px;">Please, find easiest your address<br /> with the Post Code finder</span>
+                            <span style="font-size:12px !important;">Please, find easiest your address<br /> with the Post Code finder</span>
                         </div>
 				    </div>
 				    <div id="postcodeerror"><ul class="parsley-errors-list" /></ul></div>
@@ -358,7 +358,7 @@ function minibond_registration_step2() {
                 <img src="<?php echo plugins_url( 'img/icon_call_us.png', __FILE__ ) ?>" alt="Telephone Number" class="pull-left" />
             </div>
             <div class="col-xs-11 col-md-11">
-                <h2>If you have any problem please feel free to call us <a href="tel:03456076001">0345 607 6001</a></h2>
+                <h2>If you have any problem please feel free to call us <a href="tel:03456076001" style="color: #0f3269 !important;">0345 607 6001</a></h2>
                 <span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span>
             </div>
         </div>
