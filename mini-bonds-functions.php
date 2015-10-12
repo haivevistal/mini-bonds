@@ -59,7 +59,8 @@ class MiniBondsHelper {
         
         $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
         $owner = $zoho['owner'] == '' ? 'BSEDGE' : $zoho['owner'];
-        $group = $zoho['group'] == '' ? '' : $zoho['group'];
+        $group = $zoho['group'] == '' ? 'Home' : $zoho['group'];
+        $token = $zoho['token'] == '' ? $token : $zoho['token'];
         /* get session post variables */
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
@@ -69,11 +70,12 @@ class MiniBondsHelper {
             <row no="1">
                 <FL val="Contact Owner">'.$owner.'</FL>
                 <FL val="Salutation">'.$form1['settitle'].'</FL>
+                <FL val="Account Name">'.$group.'</FL>
                 <FL val="First Name">'.$form1['firstname'].'</FL>
                 <FL val="Last Name">'.$form1['surname'].'</FL>
                 <FL val="Email">'.$form1['email'].'</FL>
                 <FL val="Title">Customer</FL>
-                <FL val="Department">Home</FL>
+                <FL val="Department"></FL>
                 <FL val="Phone">'.$form1['homephone'].'</FL>
                 <FL val="Home Phone">'.$form1['homephone'].'</FL>
                 <FL val="Mobile">'.$form1['mobilephone'].'</FL>

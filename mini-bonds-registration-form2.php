@@ -27,9 +27,11 @@ function minibond_registration_step2() {
 				<div class="form-group">
 					<label for="postcode">Postcode: <span class="red">*</span></label>
 					<div class="controls form-inline postcodelookup">
-				    	<input type="text" class="form-control" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" />
-				    	<input type="button" id="sfindaddress" class="btn btn-default" onClick= "javascript:SPLGetAddressData(document.getElementById('postcode').value, 0)" value="Find Address" />
-                        <div class="col-xs-12 col-md-5 pull-right text-left">
+                        <div class="col-xs-12 col-md-7 nopadding">
+                            <input type="text" class="form-control col-xs-12 col-md-5" id="postcode" name="postcode" data-parsley-required="true" data-parsley-error-message="Please enter your postcode" data-parsley-errors-container="#postcodeerror" value="" style="width:160px;" />
+                            <input type="button" id="sfindaddress" class="btn btn-default col-xs-12 col-md-5" onClick= "javascript:SPLGetAddressData(document.getElementById('postcode').value, 0)" value="Find Address" />
+                        </div>
+                        <div class="col-xs-12 col-md-5 text-left nopadding">
                             <span style="font-size:12px !important;">Please, find easiest your address<br /> with the Post Code finder</span>
                         </div>
 				    </div>

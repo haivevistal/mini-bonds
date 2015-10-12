@@ -10,19 +10,19 @@ body{padding-top:50px;font-family: "Roboto", sans-serif !important;font-size: 14
 .registration-container { background-color: #e4e4e4 !important; border: 1px solid #e1e1e1;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;padding: 30px;}
 h1.register-account-title { font-size: 28px !important;padding-bottom: 25px !important;font-weight: bold;font-family: Oswald Bold !important;}
 .form-title { font-size: 24px !important;}
-#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue, .step4-a-form  input.continue, .step4-b-form  input.continue, .step4-c-form  input.continue, .step4-d-form  input.continue{/*background: url(../../img/btn_next.png);*/background: #18cb00; width: 108px;height: 34px;font-weight: 600;font-size: 16px;border: none;background-repeat: no-repeat;float: right;outline:0;}
-#minibonds-registrationForm  table, #minibonds-registrationForm  td, .step2-form table, .step2-form td, .step3-form table, .step3-form td { border: 0 !important;}
-#minibonds-registrationForm  td, .step2-form td, .step3-form td { padding: 7px 20px 7px 0 !important;background-color: #fff;}
+#minibonds-registrationForm input.continue, .step2-form  input.continue , .step3-form  input.continue, .step4-form  input.continue, .step4-a-form  input.continue, .step4-b-form  input.continue, .step4-c-form  input.continue, .step4-d-form  input.continue, #minibonds-paymentForm input.continue {/*background: url(../../img/btn_next.png);*/background: #18cb00; width: 108px;height: 34px;font-weight: 600;font-size: 16px;border: none;background-repeat: no-repeat;float: right;outline:0;}
+#minibonds-registrationForm  table, #minibonds-registrationForm  td, .step2-form table, .step2-form td, .step3-form table, .step3-form td, #minibonds-paymentForm table, #minibonds-paymentForm td { border: 0 !important;}
+#minibonds-registrationForm  td, .step2-form td, .step3-form td, #minibonds-paymentForm td { padding: 7px 20px 7px 0 !important;background-color: #fff;}
 .step2-form, .step3-form{ margin-top: 35px;}
 .step4-form , .step4-a-form, .step4-b-form, .step4-c-form, .step4-d-form{ margin-top: 9px;}
 .parsley-errors-list, .parsley-errors-list li { list-style-type: none !important;padding-left: 0px !important;color: #bc1437;margin-left: 0 !important;}
 .parsley-error {background-color: #f5e3e7 !important;}
 #birthdayerror ul { height: 5px !important;}
-#minibonds-registrationForm table, .step2-form table, .step3-form table, .step4-form table { margin-bottom: 0px !important; }
+#minibonds-registrationForm table, .step2-form table, .step3-form table, .step4-form table, #minibonds-paymentForm table{ margin-bottom: 0px !important; }
 .form-group {margin-bottom: 20px !important;}
 .financiainformation .col-md-5 span { line-height: 16px !important; }
-#minibonds-registrationForm .fa, .step2-form  .fa, .step3-form  .fa, .step4-form  .fa { font-size: 18px !important ;}
-#minibonds-registrationForm .fa-complete, .step2-form  .fa-complete, .step3-form  .fa-complete, .step4-form  .fa-complete { color: #60b044; } 
+#minibonds-registrationForm .fa, .step2-form  .fa, .step3-form  .fa, .step4-form  .fa, #minibonds-paymentForm .fa { font-size: 18px !important ;}
+#minibonds-registrationForm .fa-complete, .step2-form  .fa-complete, .step3-form  .fa-complete, .step4-form  .fa-complete, #minibonds-paymentForm .fa-complete { color: #60b044; } 
 .nopadding { padding: 0 !important;}
 .step4_footer a{line-height: 22px;}
 #fundsourceSelectBoxIt, #networthSelectBoxIt { width: 268px !important; }
@@ -43,4 +43,5 @@ img.register-steps { width: 28% !important; margin-right: -25px;}
 .step4-a-form .parsley-error , .step4-d-form .parsley-error { background: none !important;}
 .step4-a-form input[type="checkbox"], .step4-d-form input[type="checkbox"] { outline:0 !important; border: 0px solid #ccc !important; }
 .tabs_content { border: 1px solid #ccc; padding: 20px;}
+#minibonds-paymentForm label { width: 100% !important;}
 @media (max-width: 600px) { img.register-steps { width: 95% !important;margin-right: 0px;margin-bottom: 15px;} }
