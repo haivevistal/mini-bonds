@@ -53,7 +53,7 @@ class MiniBondsHelper {
     }
     
     /* save details to Zoho CRM */
-    function mini_bonds_add_people_to_zoho_crm($investment) {
+    function mini_bonds_add_people_to_zoho_crm() {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
         $token = $config['zoho_token'];
         
@@ -65,7 +65,8 @@ class MiniBondsHelper {
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
         $form3 = $this->mini_bonds_get_session('form3');
-        $investment = $investment;
+        $investment = $this->mini_bonds_get_session('investment_details');
+        $form5 = $this->mini_bonds_get_session('form5');
         $myxml='<Contacts>
             <row no="1">
                 <FL val="Contact Owner">'.$owner.'</FL>
@@ -86,13 +87,22 @@ class MiniBondsHelper {
                 <FL val="Mailing Zip">'.$form2['postcode'].'</FL>
                 <FL val="Mailing Country">'.$form2['county'].'</FL>
                 <FL val="Username">'.$form1['email'].'</FL>
-                <FL val="Password">'.$form3['password'].'</FL>
+                <FL val="Password">'.md5($form3['password']).'</FL>
                 <FL val="Security Question">'.$form3['securityquestion'].'</FL>
                 <FL val="Security Answer">'.$form3['securityanswer'].'</FL>
                 <FL val="Net Worth">'.$form3['networth'].'</FL>
                 <FL val="Fund Source">'.$form3['fundsource'].'</FL>
                 <FL val="Other Fund Source">'.$form3['otherfundsource'].'</FL>
-                <FL val="Description">'.$investment.'</FL>
+                <FL val="Investment Details">'.$investment.'</FL>
+                <FL val="Total Amount">'.$form5['total_amount'].'</FL>
+                <FL val="Payment Method">'.$form5['payment_method'].'</FL>
+                <FL val="Payment Currency">'.$form5['payment_currency'].'</FL>
+                <FL val="Card Charge">'.$form5['card_charge'].'</FL>
+                <FL val="Type of Card">'.$form5['card_type'].'</FL>
+                <FL val="Card Holder Name">'.$form5['card_holder_name'].'</FL>
+                <FL val="Card Number">'.$form5['card_number'].'</FL>
+                <FL val="Expiry Date">'.$form5['expirymonth'].'/'.$form5['expiryyear'].'</FL>
+                <FL val="Card Security Code">'.$form5['security_code'].'</FL>
             </row>
             </Contacts>';
         

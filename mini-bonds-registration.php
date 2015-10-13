@@ -110,62 +110,42 @@ function minibond_registration($atts) {
     } else if( $step == '4' ) {
         if( isset($_POST['step4_a']) ) {
             $minibonds_helper->mini_bonds_save_session('form4_a', $_POST);
-            $minibonds_helper->mini_bonds_save_session( 'step4_a', 'success' );
+            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
             
             $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_a' );
             $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['accept_investment'].', How easily can you sell your bonds: '.$form4['how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$form4['return_providence_bond'].', Is your capital secure: '.$form4['capital_secure'].', Medium or Long-term Investment: '.$form4['short_or_long_term'];
-            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
-                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
-            }
+            $minibonds_helper->mini_bonds_save_session('investment_details', $d);
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
         }
         
         if( isset($_POST['step4_b']) ) {
             $minibonds_helper->mini_bonds_save_session('form4_b', $_POST);
-            $minibonds_helper->mini_bonds_save_session( 'step4_b', 'success' );
+            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
             
             $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_b' );
             $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['advised_investor'];
-            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
-                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
-            }
+            $minibonds_helper->mini_bonds_save_session('investment_details', $d);
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
         }
         
         if( isset($_POST['step4_c']) ) {
             $minibonds_helper->mini_bonds_save_session('form4_c', $_POST);
-            $minibonds_helper->mini_bonds_save_session( 'step4_c', 'success' );
+            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
             
             $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_c' );
             $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['self_certified_investor'];
-            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
-                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
-            }
+            $minibonds_helper->mini_bonds_save_session('investment_details', $d);
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
         }
         
         if( isset($_POST['step4_d']) ) {
             $minibonds_helper->mini_bonds_save_session('form4_d', $_POST);
-            $minibonds_helper->mini_bonds_save_session( 'step4_d', 'success' );
+            $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
             
             $form4 = $minibonds_helper->mini_bonds_get_session( 'form4_c' );
             $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['accept_high_net_investor_promotions'].', How easily can you sell your bonds: '.$form4['high_net_investor_how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$form4['high_net_investor_return_providence_bond'].', Is your capital secure: '.$form4['high_net_investor_capital_secure'].', Medium or Long-term Investment: '.$form4['high_net_investor_short_or_long_term'];
-            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm($d);
-            if( $res->error->code ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
-            } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
-                $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
-            }
+            $minibonds_helper->mini_bonds_save_session('investment_details', $d);
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'5/' );
         }
         
         if( $minibonds_helper->mini_bonds_get_session('step3') !='success' ) {
@@ -176,7 +156,15 @@ function minibond_registration($atts) {
         if( isset($_POST['step5']) ) {
             $minibonds_helper->mini_bonds_save_session('form5', $_POST );
             $minibonds_helper->mini_bonds_save_session( 'step5', 'success' );
-            
+            $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm();
+            if( $res->error->code ) {
+                echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
+            } else {
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+            }
+        }
+        if( $minibonds_helper->mini_bonds_get_session('step4') !='success' ) {
+            $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
         }
         minibond_payment();
     } else {

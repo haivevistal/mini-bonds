@@ -24,7 +24,7 @@ function minibond_registration_step2() {
             <input type="hidden" name="step2" value="true" />
             <div class="row">
 			<div class="col-xs-12 col-md-6">
-				<div class="form-group">
+				<div class="form-group" style="height: 54px;">
 					<label for="postcode">Postcode: <span class="red">*</span></label>
 					<div class="controls form-inline postcodelookup">
                         <div class="col-xs-12 col-md-7 nopadding">

@@ -17,7 +17,7 @@ function minibond_payment() {
         </div>
         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 nopadding">
             <form method="post" name="minibonds-paymentForm" id="minibonds-paymentForm" role="form" novalidate="">
-                <input type="hidden" name="step1" value="true" />
+                <input type="hidden" name="step5" value="true" />
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 nopadding">
@@ -58,10 +58,10 @@ function minibond_payment() {
                             <div id="payment_currency_error" style="margin-bottom: 24px;"></div>
                         </div>
                         <div class="form-group">
-                            <label for="card_change">Card Charge: <span class="red">*</span></label>
+                            <label for="card_charge">Card Charge: <span class="red">*</span></label>
                             <div class="col-xs-12 col-md-12 nopadding">
                                 <div class="col-xs-12 col-md-4 nopadding">
-                                    <input type="text" class="form-control" id="card_change" name="card_change" value="" data-parsley-required="true" data-parsley-error-message="Please enter card change." style="background:#0f3269 !important;color:#fff !important;text-align:right;" />
+                                    <input type="text" class="form-control" id="card_charge" name="card_charge" value="" data-parsley-required="true" data-parsley-error-message="Please enter card change." style="background:#0f3269 !important;color:#fff !important;text-align:right;" />
                                     <div id="card_change_error" style="margin-bottom: 24px;"></div>
                                 </div>
                                 <div class="col-xs-12 col-md-8">
