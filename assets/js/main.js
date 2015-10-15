@@ -3,6 +3,7 @@
     $(document).ready( function() {
         $('#minibonds-registrationForm').parsley();
         $('#minibonds-paymentForm').parsley();
+        $('.login-form').parsley();
         window.ParsleyValidator.addValidator('dobvalidation', function () {
             if(!$("#selmonth").val()) {
                 window.ParsleyValidator.addMessage('en', 'dobvalidation', 'Please select a valid month');

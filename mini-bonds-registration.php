@@ -55,11 +55,10 @@ function minibond_registration($atts) {
             $f3 = $minibonds_helper->mini_bonds_get_session('form3');
             $zemail = trim($f1['email']);
             $zpass = trim($f3['password']);
+            /* create a login page programmatically */
+            $minibonds_helper->createLoginPage();
             
-            if ( is_user_logged_in() ) {
-                wp_logout();
-            }
-            
+            /* create a wordpress user programmatically */
             $exist_id = username_exists( $zemail );
             if( !$exist_id and email_exists( $zemail ) == false ) {
                 /* create new user and login it in wordpress */
@@ -70,30 +69,6 @@ function minibond_registration($atts) {
                     wp_set_current_user( $user_id, $user->user_login );
                     wp_set_auth_cookie( $user_id, true );
                     do_action( 'wp_login', $user->user_login );
-                    $creds = array();
-                    $creds['user_login'] = $user->user_login;
-                    $creds['user_password'] = $zpass;
-                    $creds['remember'] = true;
-                    $user = wp_signon( $creds, false );
-                }
-            } else {
-                /* login the user in wordpress */
-                $user = get_user_by( 'login', $zemail );
-                $user_id = $user->ID;
-                $user = get_user_by( 'id', $user_id );
-                if( $user ) {
-                    /*$curr_user=  new WP_User( $user_id , $user->user_login ); */
-                    wp_set_current_user( $user_id, $user->user_login );
-                    wp_set_auth_cookie( $user_id, true );
-                    do_action( 'wp_login', $user->user_login );
-                    $creds = array();
-                    $creds['user_login'] = $user->user_login;
-                    $creds['user_password'] = $zpass;
-                    $creds['remember'] = true;
-                    $user = wp_signon( $creds, false );
-                }
-                if ( is_user_logged_in() ) {
-                    return true;
                 }
             }
             
@@ -160,7 +135,7 @@ function minibond_registration($atts) {
             if( $res->error->code ) {
                 echo '<div class="col-xs-12 col-md-12 alert alert-danger dismissable" style="margin-top:10px;">'.$res->error->message.'</div>';
             } else {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Successful Creation.</div>';
+                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Payment Successful.</div>';
             }
         }
         if( $minibonds_helper->mini_bonds_get_session('step4') !='success' ) {

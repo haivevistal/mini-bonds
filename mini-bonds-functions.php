@@ -55,12 +55,11 @@ class MiniBondsHelper {
     /* save details to Zoho CRM */
     function mini_bonds_add_people_to_zoho_crm() {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
-        $token = $config['zoho_token'];
-        
+
         $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
         $owner = $zoho['owner'] == '' ? 'BSEDGE' : $zoho['owner'];
         $group = $zoho['group'] == '' ? 'Home' : $zoho['group'];
-        $token = $zoho['token'] == '' ? $token : $zoho['token'];
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
         /* get session post variables */
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
@@ -123,7 +122,9 @@ class MiniBondsHelper {
     
     function mini_bonds_check_if_exist_zoho_crm($email) {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
-        $token = $config['zoho_token'];
+        
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
         
         $url = "https://crm.zoho.com/crm/private/xml/Contacts/getSearchRecordsByPDC";
         $param= "authtoken=".$token."&scope=crmapi&newFormat=1&selectColumns=Email&searchColumn=email&searchValue=".$email;
@@ -142,7 +143,8 @@ class MiniBondsHelper {
     
     function loginUser($user, $pass) {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
-        $token = $config['zoho_token'];
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
         $param= "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password,First Name,Last Name)&criteria=((Email:".$user.")AND(Password:".$pass."))";
@@ -159,7 +161,28 @@ class MiniBondsHelper {
         $array = json_decode($result);
         return $array->response->result;
     }
-
+    
+    function createLoginPage() {
+        $the_page_title = 'Mini Bond Login';
+        $the_page_name = 'mini-bond-login';
+        $the_page = get_page_by_title( $the_page_title );
+        
+        if ( ! $the_page ) {
+            $_p = array();
+            $_p['post_title'] = $the_page_title;
+            $_p['post_content'] = "[mini-bond-login]";
+            $_p['post_status'] = 'publish';
+            $_p['post_type'] = 'page';
+            $_p['comment_status'] = 'closed';
+            $_p['ping_status'] = 'closed';
+            $_p['post_category'] = array(1);
+            $the_page_id = wp_insert_post( $_p );
+        } else {
+            $the_page_id = $the_page->ID;
+            $the_page->post_status = 'publish';
+            $the_page_id = wp_update_post( $the_page );
+        }
+    }
 }
 
 function programmatic_login($login_user, $login_pass) {
