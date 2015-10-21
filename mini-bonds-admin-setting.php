@@ -24,14 +24,15 @@ function minibond_admin_setting() {
             <form method="post" data-parsley-validate="" role="form" novalidate="" class="mini-bonds-setting">
                 <?php  $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' )); ?>
                 <div class="col-xs-12 col-md-11">
+                    <h3>PLEASE USE TWO BROWSERS TO KEEP THE SUPER ADMIN AND USER PROFILES SEPERATE TO COMPLETE THIS PROCESS</h3>
                     <div class="form-group">
                         <label for="owner">Mini-Bond Company: <span class="red">*</span>
-                        <br /><small style="color:red;">This is the zoho user. To view the list of users, login as super admin in zoho, follow the instructions for confirming the user and then come back here and <a href="https://crm.zoho.com/crm/ShowSetup.do?tab=usersPermi&subTab=users" target="_blank">click this link</a>. After you see put the user name in the below input field.</small>
+                        <br /><small style="color:red;">This is the zoho user. To view the list of users, login as BSEDGE (super admin) in ZOHO CRM. Add New user, set user role as Manager and Profile as Standard. </small>
                         </label>
-                        <input type="text" class="form-control" id="owner" name="owner" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['owner']; ?>" placeholder="Berkely Holmes" required />
+                        <input type="text" class="form-control" id="owner" name="owner" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['owner']; ?>" placeholder="BSEDGE" required />
                     </div>
                     <div class="form-group">
-                        <label for="group">Mini-bond Name: <br /><small style="color:red;">This is the zoho account name that represent for departments of a company. To view the list of accounts, login to your new user in zoho and come back here and <a href="https://crm.zoho.com/crm/ShowTab.do?module=Accounts" target="_blank">copy this link</a>, and open it in a browser where your new standard user logged in. Create New Account and add the Account Name in the input field below.</small></label>
+                        <label for="group">Mini-bond Name: <br /><small style="color:red;">First Name and Last Name will be used as the company name here. In a separate browser follow the email instructions for confirming the user. In the super admin browser come back here and <a href="https://crm.zoho.com/crm/ShowTab.do?module=Accounts" target="_blank">click this link</a>. After you see put the user name ( First-Name Last-Name) in the below input field.</small></label>
                         <input type="text" class="form-control" id="group" name="group" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['group']; ?>" placeholder="My Account 1" required />
                     </div>
                     <div class="form-group">
