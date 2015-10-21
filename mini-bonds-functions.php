@@ -183,58 +183,6 @@ class MiniBondsHelper {
             $the_page_id = wp_update_post( $the_page );
         }
     }
-    
-    function sendPayment() {
-        $register_url = $this->mini_bonds_get_session('register_url');
-        $form1 = $this->mini_bonds_get_session('form1');
-        $form2 = $this->mini_bonds_get_session('form2');
-        $form3 = $this->mini_bonds_get_session('form3');
-        $form4 = $this->mini_bonds_get_session('form4');
-        $form5 = $this->mini_bonds_get_session('form5');
-        $agent_id = '10034';
-        $secret_in_key = 'SECRET_IN_KEY_25OwnQasw7z9Xh7V5qLA6s2RV0S6885Qix2nHrPx';
-        /*$string = 'agent_name='.$form5['card_holder_name'].''.$secret_in_key.'agentid=10034'.$secret_in_key.'amount='.$form5['total_amount'].''.$secret_in_key.'buy_currency='.$form5['payment_currency'].''.$secret_in_key.'title='.$form1['settitle'].''.$secret_in_key.'name='.$form1['firstname'].' '.$form1['surname'].''.$secret_in_key.'';
-        $hash_values = strtoupper( hash("sha512", $string ) );*/
-        
-        $address = ''; $address2 = '';
-        if( !empty($form2['housenumber']) ) {
-            $address .= $form2['housenumber'];
-            $address2 .= $form2['housenumber'];
-        }
-        if( !empty($form2['street']) ) {
-            $address .= ', '.$form2['street'];
-        }
-        if( !empty($form2['street2']) ) {
-            $address2 .= ', '.$form2['street2'];
-        }
-        if( !empty($form2['city']) ) {
-            $address .= ', '.$form2['city'];
-            $address2 .= ', '.$form2['city'];
-        }
-        
-        $url = 'https://gcen.i-dash.co.uk/Public/Payment';
-        
-        $param_string = 'PaymentType='.$form5['card_type'].'&Name='.$form5['card_holder_name'].'&Address1='.$address.'&Address2='.$address2.'&PostCode='.$form2['postcode'].'&CountryCode=UK';
-        
-        $param = array('ClientId' => 100, 'Currency' => $form5['payment_currency'], 'Amount' => $form5['total_amount'], 'ReturnUrl' => $register_url.'5/', 'PaymentType' => $form5['card_type'], 'Name' => $form5['card_holder_name'], 'Address1' => $address, 'Address2' => $address2, 'PostCode' => $form2['postcode'], 'CountryCode' => 'UK' );
-
-        $postData = json_encode($param);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:  application/json"));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $param_string );
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $array = json_decode($result);
-        //echo json_encode($param);
-        var_dump($array);
-    }
 }
 
 function programmatic_login($login_user, $login_pass) {

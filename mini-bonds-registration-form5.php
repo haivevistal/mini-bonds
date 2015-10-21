@@ -79,12 +79,10 @@ function minibond_payment() {
                             <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 nopadding" style="margin-bottom:20px;">
                                 <div class="col-xs-12 col-md-5 nopadding">
                                     <select id="card_type" name="card_type" class="form-control" data-parsley-required="true" data-parsley-validate-if-empty="" data-parsley-errors-container="#card_type_error">
-                                        <option value="1">VISA <span style="font-style:italic;">(credit)</span></option>
-                                        <option value="3">MasterCard <span style="font-style:italic;">(credit)</span></option>
-                                        <option value="114">Visa <span style="font-style:italic;">(debit)</span></option>
-                                        <option value="117">Maestro <span style="font-style:italic;">(debit)</span></option>
-                                        <option value="119">MasterCard <span style="font-style:italic;">(debit)</span></option>
-                                        <option value="122">Visa Electron <span style="font-style:italic;">(debit)</span></option>
+                                        <option value="VISA">VISA <span style="font-style:italic;">(debit)</span></option>
+                                        <option value="Maestro">Maestro <span style="font-style:italic;">(debit)</span></option>
+                                        <option value="Master Card">Master Card <span style="font-style:italic;">(debit)</span></option>
+                                        <option value="American Express">American Express <span style="font-style:italic;">(debit)</span></option>
                                     </select>
                                     <div id="card_type_error" style="margin-bottom: 24px;"></div>
                                 </div>
@@ -100,7 +98,7 @@ function minibond_payment() {
                         </div>
                         <div class="form-group">
                             <label for="card_number">Card Number: <span class="red">*</span></label>
-                            <input type="text" maxlength="20" class="form-control" id="card_number" name="card_number" value="" data-parsley-type="digits" data-parsley-luhn="true" data-parsley-required="true" data-parsley-error-message="Please enter a valid card number" />
+                            <input type="text" maxlength="20" class="form-control" id="card_number" name="card_number" value="" data-parsley-required="true" data-parsley-error-message="Please enter a card number" />
                         </div>
                         <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 nopadding">
                             <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 nopadding">
@@ -148,7 +146,7 @@ function minibond_payment() {
                                     <div class="row">
                                         <div class="col-xs-12 col-md-12 nopadding">
                                             <div class="col-xs-12 col-md-6">
-                                                <input type="text" class="form-control" id="security_code" name="security_code" style="height: 30px;" data-parsley-errors-container="#codeerror" size="4" maxlength="4" data-parsley-type="integer" data-parsley-minlength="3" data-parsley-required="true" data-parsley-type="integer"  data-parsley-error-message="Please enter a security code." value="" />
+                                                <input type="text" class="form-control" id="security_code" name="security_code" style="height: 30px;" data-parsley-errors-container="#codeerror" size="4" maxlength="4" data-parsley-minlength="4" data-parsley-required="true" data-parsley-type="integer"  data-parsley-error-message="Please enter a security code." value="" />
                                             </div>
                                             <div class="col-xs-12 col-md-6 nopadding" style="margin-top: 7px;">
                                                 <span>What is this?</span>
