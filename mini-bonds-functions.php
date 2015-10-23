@@ -65,8 +65,38 @@ class MiniBondsHelper {
         $form2 = $this->mini_bonds_get_session('form2');
         $form3 = $this->mini_bonds_get_session('form3');
         $investment = $this->mini_bonds_get_session('investment_details');
-        $form5 = $this->mini_bonds_get_session('form5');
+        //$form5 = $this->mini_bonds_get_session('form5');
         $myxml='<Contacts>
+            <row no="1">
+                <FL val="Contact Owner">'.$owner.'</FL>
+                <FL val="Salutation">'.$form1['settitle'].'</FL>
+                <FL val="Account Name">'.$group.'</FL>
+                <FL val="First Name">'.$form1['firstname'].'</FL>
+                <FL val="Last Name">'.$form1['surname'].'</FL>
+                <FL val="Email">'.$form1['email'].'</FL>
+                <FL val="Title">Customer</FL>
+                <FL val="Department"></FL>
+                <FL val="Phone">'.$form1['homephone'].'</FL>
+                <FL val="Home Phone">'.$form1['homephone'].'</FL>
+                <FL val="Mobile">'.$form1['mobilephone'].'</FL>
+                <FL val="Date of Birth">'.$form1['setmonth'].'/'.$form1['birthdayday'].'/'.$form1['birthdayyear'].'</FL>
+                <FL val="Mailing House Number">'.$form2['housenumber'].'</FL>
+                <FL val="Mailing City">'.$form2['city'].'</FL>
+                <FL val="Mailing Street">'.$form2['street'].'</FL>
+                <FL val="Mailing Zip">'.$form2['postcode'].'</FL>
+                <FL val="Mailing Country">'.$form2['county'].'</FL>
+                <FL val="Username">'.$form1['email'].'</FL>
+                <FL val="Password">'.md5($form3['password']).'</FL>
+                <FL val="Security Question">'.$form3['securityquestion'].'</FL>
+                <FL val="Security Answer">'.$form3['securityanswer'].'</FL>
+                <FL val="Net Worth">'.$form3['networth'].'</FL>
+                <FL val="Fund Source">'.$form3['fundsource'].'</FL>
+                <FL val="Other Fund Source">'.$form3['otherfundsource'].'</FL>
+                <FL val="Investment Details">'.$investment.'</FL>
+            </row>
+            </Contacts>';
+            
+            $myxml2='<Contacts>
             <row no="1">
                 <FL val="Contact Owner">'.$owner.'</FL>
                 <FL val="Salutation">'.$form1['settitle'].'</FL>
