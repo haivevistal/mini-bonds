@@ -63,7 +63,7 @@ function minibond_registration_step4() {
                             
                             <p><input type="checkbox" name="how_easily_sell_bonds2" value="easily" /> Very easily: I can sell them like I do other stocks and bonds</p>
                             <strong>2. The expected return from Providence Bonds?</strong>
-                            <p><input type="checkbox" name="return_providence_bond" value="7.5% per annum" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error"  /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
+                            <p><input type="checkbox" name="return_providence_bond" value="seven point five percent per annum" data-parsley-required="true" data-parsley-error-message="Your answers are incorrect" data-parsley-errors-container="#questionnaire_error"  /> Is the 7.5% per annum interest paid over the term (plus my money back at the end)</p>
                             <p><input type="checkbox" name="return_providence_bond2" value="dependent on movements in the financial bond and equity markets" /> Is dependent on movements in the financial bond and equity markets</p>
                             
                             <strong>3. Is your capital secure?</strong>

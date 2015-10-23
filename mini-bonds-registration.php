@@ -71,8 +71,7 @@ function minibond_registration($atts) {
                     do_action( 'wp_login', $user->user_login );
                 }
             }
-            
-            echo '<div class="col-xs-12 col-md-12 alert alert-success">'.$res->error->message.'</div>';
+           
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
             
         }
@@ -88,7 +87,8 @@ function minibond_registration($atts) {
             $minibonds_helper->mini_bonds_save_session( 'step4', 'success' );
             
             $form4 = $minibonds_helper->mini_bonds_get_session( 'form4' );
-            $d = 'Investor Type: '.$form4['investor_type'].', Accept Investment: '.$form4['accept_investment'].', How easily can you sell your bonds: '.$form4['how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$form4['return_providence_bond'].', Is your capital secure: '.$form4['capital_secure'].', Medium or Long-term Investment: '.$form4['short_or_long_term'];
+            $return_expected = $form4['return_providence_bond'] == 'dependent on movements in the financial bond and equity markets' ? $form4['return_providence_bond'] : 'seven point 5 per annum';
+            $d = 'Investor Type: Retail Investor, Accept: '.$form4['accept_investment'].', How easily can you sell your bonds: '.$form4['how_easily_sell_bonds'].', Expected Return from Providence Bonds: '.$return_expected.', Is your capital secure: '.$form4['capital_secure'].', Medium or Long-term: '.$form4['short_or_long_term'];
             $minibonds_helper->mini_bonds_save_session('investment_details', $d);
             /* save user into CRM */
             $res = $minibonds_helper->mini_bonds_add_people_to_zoho_crm();

@@ -84,19 +84,19 @@ class MiniBondsHelper {
                 <FL val="Mailing City">'.$form2['city'].'</FL>
                 <FL val="Mailing Street">'.$form2['street'].'</FL>
                 <FL val="Mailing Zip">'.$form2['postcode'].'</FL>
-                <FL val="Mailing Country">'.$form2['county'].'</FL>
+                <FL val="Mailing Country">'.$form2['addresscountry'].'</FL>
                 <FL val="Username">'.$form1['email'].'</FL>
                 <FL val="Password">'.md5($form3['password']).'</FL>
                 <FL val="Security Question">'.$form3['securityquestion'].'</FL>
                 <FL val="Security Answer">'.$form3['securityanswer'].'</FL>
                 <FL val="Net Worth">'.$form3['networth'].'</FL>
                 <FL val="Fund Source">'.$form3['fundsource'].'</FL>
-                <FL val="Other Fund Source">'.$form3['otherfundsource'].'</FL>
+                <FL val="Other Fund Source"></FL>
                 <FL val="Investment Details">'.$investment.'</FL>
             </row>
             </Contacts>';
             
-            $myxml2='<Contacts>
+            /*$myxml2='<Contacts>
             <row no="1">
                 <FL val="Contact Owner">'.$owner.'</FL>
                 <FL val="Salutation">'.$form1['settitle'].'</FL>
@@ -133,7 +133,7 @@ class MiniBondsHelper {
                 <FL val="Expiry Date">'.$form5['expirymonth'].'/'.$form5['expiryyear'].'</FL>
                 <FL val="Card Security Code">'.$form5['security_code'].'</FL>
             </row>
-            </Contacts>';
+            </Contacts>';*/
         
         $url = "https://crm.zoho.com/crm/private/xml/Contacts/insertRecords";
         $param= "authtoken=".$token."&scope=crmapi&newFormat=1&xmlData=".$myxml;
