@@ -18,7 +18,7 @@ function minibond_login_form() {
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group">
                             <label for="email">Username / Email: <span class="red">*</span></label>
-                            <input type="email" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722">
+                            <input type="text" class="form-control" id="email" name="email" value="" data-parsley-required="true" data-parsley-error-message="Please enter your email address" data-parsley-id="5722">
                         </div>
                         <div class="form-group">
                             <label for="password">Password: <span class="red">*</span></label>
