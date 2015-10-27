@@ -191,7 +191,7 @@ class MiniBondsHelper {
         $array = json_decode($result);
         return $array->response->result;
     }
-    
+
     function createLoginPage() {
         $the_page_title = 'Mini Bond Login';
         $the_page_name = 'mini-bond-login';
@@ -265,32 +265,76 @@ class MiniBondsHelper {
         //echo json_encode($param);
         var_dump($array);
     }
-}
-
-function programmatic_login($login_user, $login_pass) {
-    $username   = $login_user;
-    /* log in automatically */
-    if ( is_user_logged_in() ) {
-        wp_logout();
-    }
     
-    add_filter( 'authenticate', 'allow_programmatic_login', 10, 3 );
-    $creds = array();
-    $creds['user_login'] = $username;
-    $creds['user_password'] = $login_pass;
-    $creds['remember'] = true;
-    $user = wp_signon( $creds, false );
-    remove_filter( 'authenticate', 'allow_programmatic_login', 10, 3 );
-    
-    if ( is_a( $user, 'WP_User' ) ) {
-        wp_set_current_user( $user->ID, $user->user_login );
-        wp_set_auth_cookie( $user->ID );
+    function programmatic_login($login_user, $login_pass) {
+        /* log in automatically */
         if ( is_user_logged_in() ) {
-            return true;
+            wp_logout();
+        }
+        
+        /* add_filter( 'authenticate', 'allow_programmatic_login', 10, 3 ); */
+        $creds = array();
+        $creds['user_login'] = $login_user;
+        $creds['user_password'] = $login_pass;
+        $creds['remember'] = true;
+        $curr_user = wp_signon( $creds , true );
+        if ( is_wp_error($curr_user) ) {
+            echo '<div class="col-xs-12 col-md-12 alert alert-danger">Oops! There was an error happened. Please try again.</div>';
+        } else {
+            wp_authenticate($login_user, $login_pass);
+            wp_set_auth_cookie($curr_user->ID);
+            wp_set_current_user( $curr_user->ID, $curr_user->user_login );
+            do_action( 'wp_login', $curr_user->user_login );
         }
     }
+    
+    function checkUser($user, $pass) {
+        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $token = $config['zoho_token'];
+        
+        $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
+        $param = "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$user.")AND(Password:".$pass."))";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $array = json_decode($result);
+        return $array->response;
+    }
+}
 
-    return false;
+add_action("wp_ajax_minibondlogin", "minibond_customlogin");
+add_action("wp_ajax_nopriv_minibondlogin", "minibond_customlogin");
+
+function minibond_customlogin(){
+
+    ob_end_clean();
+    $minibonds_helper = new MiniBondsHelper;
+    
+    $user_login = trim($_REQUEST['username']);
+    $user_password = trim($_REQUEST['password']);
+
+    $exist_id = username_exists( $user_login );
+        
+    if( !$exist_id ) {
+        $logged = $minibonds_helper->checkUser( $user_login, md5($user_password) );
+        if( $logged->error->message ) {
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist.')));
+        } else {
+            wp_create_user( $user_login, $user_password, $user_login );
+            echo json_encode( array( 'loggedin'=>true, 'message'=>__('User exist.')));
+        }
+    } else {
+        echo json_encode(array('loggedin'=>true, 'message'=>__('User exist.')));
+    }
+    die();
 }
 
 function allow_programmatic_login( $user, $username, $password ) {

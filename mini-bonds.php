@@ -72,9 +72,11 @@ function redirect_login_page(){
     $login_page  = site_url().'/mini-bond-login/?redirect_to='.site_url().'/wp-admin/&reauth=1';
 
     if( $page_viewed == "wp-login.php" ) {
-        wp_redirect( $login_page );
-        exit();
+        wp_enqueue_script('jquery');
+        wp_enqueue_script( 'minibond_js', plugins_url( 'assets/js/minibond-login.js', __FILE__ ) , array(), '1.0.0', true );
+        //wp_redirect( $login_page );
+        //exit();
     }
 }
-
+//add_action( 'before_setup_theme', 'redirect_login_page' );
 add_action( 'init','redirect_login_page', 1, 1 );
