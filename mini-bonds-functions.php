@@ -60,6 +60,7 @@ class MiniBondsHelper {
         $owner = $zoho['owner'] == '' ? 'BSEDGE' : $zoho['owner'];
         $group = $zoho['group'] == '' ? 'Home' : $zoho['group'];
         $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         /* get session post variables */
         $form1 = $this->mini_bonds_get_session('form1');
         $form2 = $this->mini_bonds_get_session('form2');
@@ -155,6 +156,7 @@ class MiniBondsHelper {
         
         $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
         $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/xml/Contacts/getSearchRecordsByPDC";
         $param= "authtoken=".$token."&scope=crmapi&newFormat=1&selectColumns=Email&searchColumn=email&searchValue=".$email;
@@ -175,6 +177,7 @@ class MiniBondsHelper {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
         $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
         $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
         $param= "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password,First Name,Last Name)&criteria=((Email:".$user.")AND(Password:".$pass."))";
@@ -291,10 +294,11 @@ class MiniBondsHelper {
     function checkUser($user, $pass) {
         include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
         $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
-        $token = $config['zoho_token'];
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
-        $param = "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$user.")AND(Password:".$pass."))";
+        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$user.")AND(Password:".$pass."))";
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -307,6 +311,50 @@ class MiniBondsHelper {
         curl_close($ch);
         $array = json_decode($result);
         return $array->response;
+    }
+    
+    function getUserFromZoho($email) {
+        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
+        
+        $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
+        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=(Email:".$email.")";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $array = json_decode($result);
+        return $array->response;
+    }
+    
+    function updateZohoUser($xml, $contactid) {
+        include_once( plugin_dir_path( __FILE__ ).'lib/config.php' );
+        $zoho = unserialize(get_option( 'mini_bond_zoho_details', '' ));
+        $token = $zoho['token'] == '' ? $config['zoho_token'] : $zoho['token'];
+        $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
+        
+        $url = "https://crm.zoho.com/crm/private/xml/Contacts/updateRecords";
+        $param = "authtoken=".$admin_token."&scope=crmapi&newFormat=1&id=".$contactid."&xmlData=".$xml;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $array = json_decode($result);
+        return 'true';
     }
 }
 
@@ -326,13 +374,64 @@ function minibond_customlogin(){
     if( !$exist_id ) {
         $logged = $minibonds_helper->checkUser( $user_login, md5($user_password) );
         if( $logged->error->message ) {
-            echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist.')));
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist. '. $logged->error->message)));
         } else {
             wp_create_user( $user_login, $user_password, $user_login );
             echo json_encode( array( 'loggedin'=>true, 'message'=>__('User exist.')));
         }
     } else {
         echo json_encode(array('loggedin'=>true, 'message'=>__('User exist.')));
+    }
+    die();
+}
+
+add_action("wp_ajax_minibondforgotpassword", "minibond_forgotpassword");
+add_action("wp_ajax_nopriv_minibondforgotpassword", "minibond_forgotpassword");
+
+function minibond_forgotpassword() {
+    ob_end_clean();
+    $minibonds_helper = new MiniBondsHelper;
+    $email = trim($_REQUEST['email']);
+    $exist_id = username_exists( $email );
+        
+    if( !$exist_id ) {
+        $logged = $minibonds_helper->checkUser( $email, md5($email) );
+        if( $logged->error->message ) {
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist. '. $logged->error->message)));
+        } else {
+            wp_create_user( $email, $email, $email );
+            echo json_encode( array( 'loggedin'=>true, 'message'=>__('User exist.')));
+        }
+    } else {
+        echo json_encode(array('loggedin'=>true, 'message'=>__('User exist.')));
+    }
+    die();
+}
+
+add_action("wp_ajax_minibondresetpassword", "minibond_resetpassword");
+add_action("wp_ajax_nopriv_minibondresetpassword", "minibond_resetpassword");
+
+function minibond_resetpassword() {
+    ob_end_clean();
+    $minibonds_helper = new MiniBondsHelper;
+    $email = trim($_REQUEST['email']);
+    $password = trim($_REQUEST['password']);
+    $exist_id = username_exists( $email );
+    
+    $user = get_user_by( 'login', $email );
+    $details = $minibonds_helper->getUserFromZoho($email);
+    $fl = $details->result->Contacts->row->FL;
+    $contactid = $fl[0]->content;
+    
+    $myxml = '<Contacts>
+            <row no="1">
+                <FL val="Password">'.md5($password).'</FL>
+            </row>
+            </Contacts>';
+    //wp_set_password( $password, $user->ID );
+    $update = $minibonds_helper->updateZohoUser($myxml, $contactid);
+    if( $update == 'true' ) {
+        echo json_encode(array('loggedin'=>true, 'message'=>__('Password successfully updated, for contact ID '.$contactid)));
     }
     die();
 }

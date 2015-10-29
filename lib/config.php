@@ -12,4 +12,5 @@ $config['opportunityId'] = '3598071';
 $config['organizationName'] = 'mini bond';
 
 /* Zoho CRM access token */
-$config['zoho_token']   = 'f5c2c439e4c1e2d7ded53aa2b8fc3a77';
+$config['zoho_token']   = '1b408a1e167529031ce1ffa6e14b4a02';
+$config['admin_token']   = '1b408a1e167529031ce1ffa6e14b4a02';

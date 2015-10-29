@@ -3,7 +3,7 @@ ini_set("max_execution_time", 0);
 
 function minibond_admin_setting() {
     if( isset($_POST['save_mini_bond_setting'])) {
-        $mini_bond_zoho_details = array( 'owner' => $_POST['owner'], 'group' =>  $_POST['group'], 'token' =>  $_POST['token'] );
+        $mini_bond_zoho_details = array( 'owner' => $_POST['owner'], 'group' =>  $_POST['group'], 'token' =>  $_POST['token'], 'admin_token' =>  $_POST['admin_token'] );
         if( get_option( 'mini_bond_zoho_details', '' ) == '' ) {
             add_option( 'mini_bond_zoho_details', serialize($mini_bond_zoho_details) );
            $updates = '<span class="alert alert-success alert-message">&emsp;Successfully Saved</span></h2>';
@@ -36,7 +36,11 @@ function minibond_admin_setting() {
                         <input type="text" class="form-control" id="group" name="group" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['group']; ?>" placeholder="My Account 1" required />
                     </div>
                     <div class="form-group">
-                        <label for="token">Token: <br /><small style="color:red;">To generate token, login into your new standard zoho account and come back on this page and <a target="_blank" href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoCRM/crmapi">copy this link</a> and open it in a browser where your new standard user logged in. Then copy the AUTHTOKEN and paste it on below input field.</small></label>
+                        <label for="admin_token">Administrator Token: <br /><small style="color:red;">To generate token, login into your administrator zoho account and come back on this page and <a target="_blank" href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoCRM/crmapi">copy this link</a> and open it in a browser where your administrator user logged in. Then copy the AUTHTOKEN and paste it on below input field.</small></label>
+                        <input type="text" class="form-control" id="admin_token" name="admin_token" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['admin_token']; ?>" placeholder="f5c2c439e4c1e2d7ded53aa2b8fc3a77" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="token">Standard User Token: <br /><small style="color:red;">To generate token, login into your new standard zoho account and come back on this page and <a target="_blank" href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoCRM/crmapi">copy this link</a> and open it in a browser where your new standard user logged in. Then copy the AUTHTOKEN and paste it on below input field.</small></label>
                         <input type="text" class="form-control" id="token" name="token" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['token']; ?>" placeholder="f5c2c439e4c1e2d7ded53aa2b8fc3a77" required />
                     </div>
                 </div>

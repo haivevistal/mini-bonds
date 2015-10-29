@@ -62,6 +62,7 @@ function minibond_login($atts) {
                         wp_set_current_user( $user_id, $user->user_login );
                         do_action( 'wp_login', $user->user_login );
                     }
+                    
                 }
             } 
         }
