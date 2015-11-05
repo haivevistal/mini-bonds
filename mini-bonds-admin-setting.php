@@ -37,7 +37,7 @@ function minibond_admin_setting() {
                     </div>
                     <div class="form-group">
                         <label for="admin_token">Administrator Token: <br /><small style="color:red;">To generate token, login into your administrator zoho account and come back on this page and <a target="_blank" href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoCRM/crmapi">copy this link</a> and open it in a browser where your administrator user logged in. Then copy the AUTHTOKEN and paste it on below input field.</small></label>
-                        <input type="text" class="form-control" id="admin_token" name="admin_token" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['admin_token']; ?>" placeholder="f5c2c439e4c1e2d7ded53aa2b8fc3a77" required />
+                        <input type="text" class="form-control" id="admin_token" name="admin_token" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['admin_token']; ?>" placeholder="1b408a1e167529031ce1ffa6e14b4a02" required />
                     </div>
                     <div class="form-group">
                         <label for="token">Standard User Token: <br /><small style="color:red;">To generate token, login into your new standard zoho account and come back on this page and <a target="_blank" href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoCRM/crmapi">copy this link</a> and open it in a browser where your new standard user logged in. Then copy the AUTHTOKEN and paste it on below input field.</small></label>

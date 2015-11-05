@@ -176,6 +176,9 @@ function minibond_registration($atts) {
         if( $minibonds_helper->mini_bonds_get_session('step4') !='success' ) {
             $minibonds_helper->mini_bonds_redirect_url('js', $register_url.'4/' );
         }
+        if( isset($_GET['REF']) && isset($_GET['RETURNMAC']) ) {
+            $minibonds_helper->getPaymentResponse($_GET['REF'], $_GET['RETURNMAC']);
+        }
         minibond_payment();
     } else {
         if( isset($_POST['step1']) ) {

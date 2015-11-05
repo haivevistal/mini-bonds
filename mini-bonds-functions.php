@@ -245,28 +245,69 @@ class MiniBondsHelper {
             $address2 .= ', '.$form2['city'];
         }
         
-        $url = 'https://gcen.i-dash.co.uk/Public/Payment';
+        $url = 'https://gcen.i-dash.co.uk/Api/CardPayment';
         
         $param_string = 'PaymentType='.$form5['card_type'].'&Name='.$form5['card_holder_name'].'&Address1='.$address.'&Address2='.$address2.'&PostCode='.$form2['postcode'].'&CountryCode=UK';
         
         $param = array('ClientId' => 100, 'Currency' => $form5['payment_currency'], 'Amount' => $form5['total_amount'], 'ReturnUrl' => $register_url.'5/', 'PaymentType' => $form5['card_type'], 'Name' => $form5['card_holder_name'], 'Address1' => $address, 'Address2' => $address2, 'PostCode' => $form2['postcode'], 'CountryCode' => 'UK' );
 
         $postData = json_encode($param);
+        
+        $username='user';
+        $password='pass';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        //curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:  application/json"));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type:  application/json",
+            "Authentication: 10034:PZD9xJrlI3MWmHyKZEGjz55yrbiA4PbKFFK2f2eNWQz9oYJd",
+            'Content-Length: ' . strlen($postData)));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $param_string );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData );
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+         
+        $result = curl_exec($ch);
+        curl_close($ch);
+        //var_dump(curl_error($ch));
+        $array = json_decode($result);
+        $this->mini_bonds_save_session( 'return_payment', $array );
+        $this->mini_bonds_redirect_url('js', $array->ReturnObject->PaymentUrl );
+    }
+    
+    function getPaymentResponse($ref, $returnmac) {
+        $url = 'https://gcen.i-dash.co.uk/Api/CheckCardPaymentResponse';
+        $param = array('REF' => $ref, 'RETURNMAC' => $returnmac );
+
+        $postData = json_encode($param);
+        
+        $username='user';
+        $password='pass';
+
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type:  application/json",
+            "Authentication: 10034:PZD9xJrlI3MWmHyKZEGjz55yrbiA4PbKFFK2f2eNWQz9oYJd",
+            'Content-Length: ' . strlen($postData)));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData );
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+         
         $result = curl_exec($ch);
         curl_close($ch);
         $array = json_decode($result);
-        //echo json_encode($param);
-        var_dump($array);
+        $payment = $this->mini_bonds_get_session( 'return_payment' );
+        if( $array->Success == true ) {
+            echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Payment with reference ID '.$ref.' and virtual deal reference of '.$array->ReturnObject.' was Successful.</div>';
+        }
     }
     
     function programmatic_login($login_user, $login_pass) {
@@ -354,7 +395,11 @@ class MiniBondsHelper {
         $result = curl_exec($ch);
         curl_close($ch);
         $array = json_decode($result);
-        return 'true';
+        if( $array->response->error->message) {
+            return 'false';
+        } else {
+            return 'true';
+        }
     }
 }
 
