@@ -1,4 +1,4 @@
-/* by Vistal */
+/* by Vistal - www.boholwebtechno.com */
 jQuery(document).ready(function($) {
     var boholwebtechno_ajax = {"ajaxurl":"wp-admin/admin-ajax.php"};
     $('form#loginform label[for="user_login"]').html('<label for="user_login">Username / Email<br><input type="text" name="log" id="user_login" class="input" value="" size="20" /></label>');
@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
                 $('#login_error').remove();
                 $('form#loginform #wp-submit').removeAttr('disabled');
                 if (data.loggedin == true) {
-                    $('form#loginform').before('<div id="message"><strong>ERROR</strong>: '+data.message+'</div>');
+                    $('form#loginform').before('<div id="message">'+data.message+'</div>');
                     document.getElementById("loginform").submit();
                     return true;
                 } else {
@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
                 $('#login_error').remove();
                 $('form#lostpasswordform #wp-submit').removeAttr('disabled');
                 if (data.loggedin == true) {
-                    $('form#lostpasswordform').before('<div id="message"><strong>ERROR</strong>: '+data.message+'</div>');
+                    $('form#lostpasswordform').before('<div id="message">'+data.message+'</div>');
                     document.getElementById("lostpasswordform").submit();
                     return true;
                 } else {
@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
                 $('#login_error').remove();
                 $('form#resetpassform #wp-submit').removeAttr('disabled');
                 if (data.loggedin == true) {
-                    $('form#resetpassform').before('<div id="message"><strong>ERROR</strong>: '+data.message+'</div>');
+                    $('form#resetpassform').before('<div id="message">'+data.message+'</div>');
                     document.getElementById("resetpassform").submit();
                     return true;
                 } else {

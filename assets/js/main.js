@@ -59,7 +59,19 @@
                 return false;
             }
         });
+        
+        $('#minibonds-paymentForm').submit( function() {
+            var total_amount = $('input[name="total_amount"]').val();
+            if( total_amount % 1000 == 0 ) {
+                return true;
+            } else {
+                $('.total_amount_error').remove();
+                $('input[name="total_amount"]').after('<ul class="parsley-errors-list filled total_amount_error"><li class="parsley-custom-error-message">Your investment must be a multiple of &pounds;1,000.</li></ul>');
+                return false;
+            }
+        });
     });
+
     $("select").selectBoxIt({});
     //$("#findaddress").click(function( e ) {e.preventDefault();findaddress("");});
     function findaddress(p){

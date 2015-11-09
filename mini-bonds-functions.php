@@ -141,7 +141,7 @@ class MiniBondsHelper {
         $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
-        $param= "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password,First Name,Last Name)&criteria=((Email:".$user.")AND(Password:".$pass."))";
+        $param= "authtoken=".$token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password,First Name,Last Name)&criteria=((Email:".$user.")AND(Password:".$pass.")AND(Account Name:".$zoho['group']."))";
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -269,7 +269,7 @@ class MiniBondsHelper {
         if( $array->Success == true ) {
             $form1 = $this->mini_bonds_get_session('form1');
             $form5 = $this->mini_bonds_get_session('form5');
-            $details = $minibonds_helper->getUserFromZoho($form1['email']);
+            $details = $this->getUserFromZoho($form1['email']);
             $fl = $details->result->Contacts->row->FL;
             $contactid = $fl[0]->content;
             $xml = '<Contacts>
@@ -321,7 +321,7 @@ class MiniBondsHelper {
         $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
-        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$user.")AND(Password:".$pass."))";
+        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$user.")AND(Password:".$pass.")AND(Account Name:".$zoho['group']."))";
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -343,7 +343,7 @@ class MiniBondsHelper {
         $admin_token = $zoho['admin_token'] == '' ? $config['admin_token'] : $zoho['admin_token'];
         
         $url = "https://crm.zoho.com/crm/private/json/Contacts/searchRecords";
-        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=(Email:".$email.")";
+        $param = "authtoken=".$admin_token."&scope=crmapi&version=1&selectColumns=Contacts(Username,Password)&criteria=((Email:".$email.")AND(Account Name:".$zoho['group']."))";
         
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -388,7 +388,7 @@ class MiniBondsHelper {
 add_action("wp_ajax_minibondlogin", "minibond_customlogin");
 add_action("wp_ajax_nopriv_minibondlogin", "minibond_customlogin");
 
-function minibond_customlogin(){
+function minibond_customlogin() {
 
     ob_end_clean();
     $minibonds_helper = new MiniBondsHelper;
@@ -404,10 +404,10 @@ function minibond_customlogin(){
             echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist. '. $logged->error->message)));
         } else {
             wp_create_user( $user_login, $user_password, $user_login );
-            echo json_encode( array( 'loggedin'=>true, 'message'=>__('User exist.')));
+            echo json_encode( array( 'loggedin'=>true, 'message'=>__('Congratulations!! You are successfully logged in.')));
         }
     } else {
-        echo json_encode(array('loggedin'=>true, 'message'=>__('User exist.')));
+        echo json_encode(array('loggedin'=>true, 'message'=>__('Congratulations!! You are successfully logged in.')));
     }
     die();
 }
@@ -427,10 +427,10 @@ function minibond_forgotpassword() {
             echo json_encode(array('loggedin'=>false, 'message'=>__('Oops! There was an error happened. User does not exist. '. $logged->error->message)));
         } else {
             wp_create_user( $email, $email, $email );
-            echo json_encode( array( 'loggedin'=>true, 'message'=>__('User exist.')));
+            echo json_encode( array( 'loggedin'=>true, 'message'=>__('Congratulations!! You are successfully logged in.')));
         }
     } else {
-        echo json_encode(array('loggedin'=>true, 'message'=>__('User exist.')));
+        echo json_encode(array('loggedin'=>true, 'message'=>__('Congratulations!! You are successfully logged in.')));
     }
     die();
 }

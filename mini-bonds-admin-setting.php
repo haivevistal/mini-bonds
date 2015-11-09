@@ -27,12 +27,12 @@ function minibond_admin_setting() {
                     <h3>PLEASE USE TWO BROWSERS TO KEEP THE SUPER ADMIN AND USER PROFILES SEPERATE TO COMPLETE THIS PROCESS</h3>
                     <div class="form-group">
                         <label for="owner">Mini-Bond Company: <span class="red">*</span>
-                        <br /><small style="color:red;">This is the zoho user. To view the list of users, login as BSEDGE (super admin) in ZOHO CRM. Add New user, set user role as Manager and Profile as Standard. </small>
+                        <br /><small style="color:red;">This is the zoho user. To view the list of users, login as BSEDGE (super admin) in ZOHO CRM. Add New user, set user role as Manager and Profile as Standard. First Name and Last Name will be used as the company name here. In a separate browser follow the email instructions for confirming the user. In the super admin browser come back here and click this link. After you see put the user name ( First-Name Last-Name) in the below input field.</small>
                         </label>
                         <input type="text" class="form-control" id="owner" name="owner" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['owner']; ?>" placeholder="BSEDGE" required />
                     </div>
                     <div class="form-group">
-                        <label for="group">Mini-bond Name: <br /><small style="color:red;">First Name and Last Name will be used as the company name here. In a separate browser follow the email instructions for confirming the user. In the super admin browser come back here and <a href="https://crm.zoho.com/crm/ShowTab.do?module=Accounts" target="_blank">click this link</a>. After you see put the user name ( First-Name Last-Name) in the below input field.</small></label>
+                        <label for="group">Mini-bond Name: <br /><small style="color:red;">Log into the CRM using the minibond Company name and create a New Account. The Account Name should be the name of the minibond. No other details required. To view the list of accounts <a href="https://crm.zoho.com/crm/ShowTab.do?module=Accounts" target="_blank">click here</a>.</small></label>
                         <input type="text" class="form-control" id="group" name="group" data-parsley-required="true" data-parsley-error-message="This is a required field" value="<?php echo $zoho['group']; ?>" placeholder="My Account 1" required />
                     </div>
                     <div class="form-group">
