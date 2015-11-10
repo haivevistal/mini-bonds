@@ -55,6 +55,7 @@ include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form4.php'
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-registration-form5.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login-form.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-login.php');
+include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-thank-you-form.php');
 include_once( plugin_dir_path( __FILE__ ) . '/mini-bonds-shortcodes.php');
 
 function mini_bonds() {
@@ -72,6 +73,8 @@ function redirect_login_page(){
     $login_page  = site_url().'/mini-bond-login/?redirect_to='.site_url().'/wp-admin/&reauth=1';
 
     if( $page_viewed == "wp-login.php" || ( isset($_GET['action']) && $_GET['action'] == 'lostpassword' ) ) {
+        wp_register_style( 'custom_login_css', plugins_url( 'assets/css/login.css', __FILE__ ), false, '3.3.5' );
+        wp_enqueue_style( 'custom_login_css' );
         wp_enqueue_script('jquery');
         wp_enqueue_script( 'minibond_js', plugins_url( 'assets/js/minibond-login.js', __FILE__ ) , array(), '1.0.0', true );
         //wp_redirect( $login_page );

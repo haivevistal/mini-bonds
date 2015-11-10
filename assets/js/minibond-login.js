@@ -2,7 +2,10 @@
 jQuery(document).ready(function($) {
     var boholwebtechno_ajax = {"ajaxurl":"wp-admin/admin-ajax.php"};
     $('form#loginform label[for="user_login"]').html('<label for="user_login">Username / Email<br><input type="text" name="log" id="user_login" class="input" value="" size="20" /></label>');
+    $('form#loginform').after('<div class="contact_support"><strong>Customer Support</strong><br><a href="tel:98080707">98080707</a><br><a href="mailto:example@domain.com">example@domain.com</a></div>');
+    $('#nav').after('<div class="bottom_cta bottom-tel"><div class="col-xs-1 col-md-1"><img src="/wp-content/plugins/mini-bonds/img/icon_call_us.png" alt="Telephone Number" class="pull-left"></div><div class="col-xs-11 col-md-11"><h2>If you have any problem please feel free to call us <a href="tel:03456076001" style="color: #0f3269 !important;">0345 607 6001</a></h2><span>Monday - Friday 07:30-21:00 - Saturday 09:00-15:00</span></div></div>');
     $('.login-action-lostpassword .message').text('Please enter your email address. You will receive a link to create a new password via email.');
+    $('.login h1 a').text('LOGIN INTO YOUR ACCOUNT').attr('href', 'javascript:;');
     $('form#loginform input[name="wp-submit"]').click( function(e) {
         e.preventDefault();
         $('.message').remove();

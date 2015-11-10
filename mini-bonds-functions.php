@@ -178,6 +178,28 @@ class MiniBondsHelper {
         }
     }
     
+    function createThankYouPage() {
+        $the_page_title = 'MiniBond Thank You';
+        $the_page_name = 'minibond-thank-you';
+        $the_page = get_page_by_title( $the_page_title );
+        
+        if ( ! $the_page ) {
+            $_p = array();
+            $_p['post_title'] = $the_page_title;
+            $_p['post_content'] = "[mini-bond-thankyou]";
+            $_p['post_status'] = 'publish';
+            $_p['post_type'] = 'page';
+            $_p['comment_status'] = 'closed';
+            $_p['ping_status'] = 'closed';
+            $_p['post_category'] = array(1);
+            $the_page_id = wp_insert_post( $_p );
+        } else {
+            $the_page_id = $the_page->ID;
+            $the_page->post_status = 'publish';
+            $the_page_id = wp_update_post( $the_page );
+        }
+    }
+    
     function sendPayment() {
         $register_url = $this->mini_bonds_get_session('register_url');
         $form1 = $this->mini_bonds_get_session('form1');
@@ -287,7 +309,9 @@ class MiniBondsHelper {
             </Contacts>';
             $update = $this->updateZohoUser($xml, $contactid);
             if( $update == 'true' ) {
-                echo '<div class="col-xs-12 col-md-12 alert alert-success dismissable" style="margin-top:10px;">Payment with reference ID '.$ref.' and virtual deal reference of '.$array->ReturnObject.' was Successful.</div>';
+                $this->mini_bonds_save_session( 'p_ref', $ref );
+                $this->mini_bonds_save_session( 'p_deal_ref', $array->ReturnObject );
+                $this->mini_bonds_redirect_url('js', '/minibond-thank-you/' );
             }
         }
     }

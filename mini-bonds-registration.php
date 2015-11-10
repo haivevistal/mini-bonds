@@ -56,7 +56,7 @@ function minibond_registration($atts) {
             $zemail = trim($f1['email']);
             $zpass = trim($f3['password']);
             /* create a login page programmatically */
-            $minibonds_helper->createLoginPage();
+            $minibonds_helper->createThankYouPage();
             
             /* create a wordpress user programmatically */
             $exist_id = username_exists( $zemail );
