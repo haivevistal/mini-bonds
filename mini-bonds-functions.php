@@ -37,7 +37,7 @@ class MiniBondsHelper {
     /* function redirect url via js or php */
     function mini_bonds_redirect_url($type, $loc ) {
         if( $type == 'js') {
-            echo '<script type="text/javascript">window.location.href="'.$loc.'";</script>';
+            echo '<script type="text/javascript">parent.window.location.href="'.$loc.'";</script>';
         } else {
             wp_redirect( $loc, 301  ); exit;
         }
@@ -258,7 +258,8 @@ class MiniBondsHelper {
         //var_dump(curl_error($ch));
         $array = json_decode($result);
         $this->mini_bonds_save_session( 'return_payment', $array );
-        $this->mini_bonds_redirect_url('js', $array->ReturnObject->PaymentUrl );
+        $this->mini_bonds_save_session( 'payment_url', $array->ReturnObject->PaymentUrl );
+        return;
     }
     
     function getPaymentResponse($ref, $returnmac) {
